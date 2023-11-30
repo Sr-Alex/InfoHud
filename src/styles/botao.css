@@ -1,0 +1,13 @@
+.botao {
+    width: 4rem; height: 1.5rem;
+
+    font-size: .65rem;
+    font-weight: bold;
+    text-align: center;
+
+    color: var(--IH-white);
+    background-color: var(--IH-blue);
+
+    border: none;
+    border-radius: .5rem;
+}

@@ -1,6 +1,16 @@
+import MenuSuperior from './menuSuperior.jsx';
+import MenuPesquisa from './menuPesquisa.jsx'
+import Vitrine from './vitrine.jsx';
+
 function App() {
   return (
-    <h1>Hello World!</h1>
+    <>
+      <MenuSuperior/>
+      <main>
+        <MenuPesquisa/>
+        <Vitrine/>
+      </main>
+    </>
   );
 }
 

@@ -1,0 +1,72 @@
+@font-face {
+    font-family: ArquivoBlack;
+    src: url("../fonts/ArchivoBlack-Regular.ttf");
+}
+
+#menuSuperior {
+    width: 100%; min-height: 4rem;
+    padding: 0 0.5rem;
+
+    display: flex; align-items: center;
+    justify-content: space-between;
+
+    position: fixed;
+
+    background: var(--IH-white);
+    box-shadow: 0 4px 4px #0000001f;
+}
+
+#menuSuperior #logo {
+    font-size: .75rem;
+}
+
+#menuSuperior #logo span {
+    color: var(--IH-blue);
+    font-weight: bolder;
+}
+
+#menuSuperior nav {
+    display: flex; align-items: center;
+    justify-content: space-evenly;
+}
+
+#menuSuperior nav #anchor a{
+    margin: 0 4px;
+
+    color: var(--IH-gray);
+    font-size: 1rem;
+    font-weight: bolder;
+    text-decoration: none;
+}
+
+#menuSuperior nav #pesquisar {
+    display: none;
+    min-width: 8rem; height: 1.5rem;
+    padding: 0 4px;
+
+    border: 2px solid var(--IH-gray);
+    border-radius: 4rem;
+}
+
+#menuSuperior nav #pesquisar button {
+    background: none;
+    border: none;
+}
+
+#menuSuperior nav #pesquisar input {
+    width: 100%;
+    background: none;
+
+    color: var(--IH-gray);
+    border: none;
+}
+
+#menuSuperior nav #pesquisar input:focus-visible {
+    outline: none;
+}
+
+@media screen and (min-width: 768px) {
+    #menuSuperior nav #pesquisar {
+        display: flex;
+    }
+}
