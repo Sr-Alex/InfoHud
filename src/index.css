@@ -1,0 +1,60 @@
+@font-face {
+    font-family: 'ArchivoBlack';
+    src: url('fonts/ArchivoBlack-Regular.ttf');
+}
+
+:root {
+    --IH-blue: #1E7387;
+    --IH-white: #dfe6ed;
+    --IH-gray: #575757;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0; padding: 0;
+
+    transition-duration: .2s;
+}
+
+body {
+    width: 100vw; height: 100vh;
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--IH-gray);
+}
+
+input {
+    padding: 0 .5rem;
+    color: var(--IH-gray);
+    border: none;
+    border-radius: 1rem;
+}
+
+input, textarea:focus-visible {
+    outline: none;
+}
+
+button {
+    border: none;
+    background: none;
+}
+
+img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+::-webkit-scrollbar {
+    width: .3rem; height: 1rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--IH-blue);
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}

@@ -1,0 +1,177 @@
+#criacaoPage {
+    display: flex; flex-direction: column;
+    width: 100%; height: calc(100vh - 3rem);
+
+    overflow-y: auto;
+}
+
+#cabecalho {
+    display: flex; flex-direction: column;
+    width: 100%;
+    margin: 1rem 0; padding: 0 1rem;
+}
+
+#cabecalho h4 {
+    font-size: 1.25em;
+    margin: 0;
+}
+
+#cabecalho label {
+    font-size: 1em;
+    font-weight: bolder;
+}
+
+#cabecalho input {
+    max-width: 16rem; width: 70%;
+    height: 2rem;
+    margin: 1rem 0;
+
+    background-color: var(--IH-white);
+}
+
+#miniatura {
+    display: flex; flex-direction: column;
+    align-items: center;
+    width: 16rem; height: 12rem;
+
+    background-color: var(--IH-white);
+    border-radius: 1rem;
+}
+
+#miniatura div {
+    display: flex; align-items: flex-end;
+    width: 90%; height: 2rem;
+    padding: 0 1rem;
+
+    border-bottom: 2px solid var(--IH-gray);
+}
+
+#miniatura div input {
+    width: 100%;
+    margin: 0; padding: 0;
+}
+
+#miniatura figure {
+    width: 8rem; height: 8rem;
+    margin: 1rem auto;
+}
+
+#conteudo {
+    width: 100%;
+    padding: 1rem;
+
+    color: var(--IH-white);
+    background-color: var(--IH-blue);
+}
+
+#conteudo h5, #conteudo h4 {
+    display: block;
+    margin: .5rem 0 1rem auto;
+    padding: 0 0 0 1rem;
+    
+    text-align: end;
+    font-weight: bold;
+    word-break: break-all;
+
+    border-bottom: 2px solid var(--IH-white);
+}
+
+#conteudo #previewTitulo {
+    width: 80%;
+}
+
+#conteudo #previewSubtitulo {
+    width: 70%;
+}
+
+#conteudo #previewMiniatura {
+    width: 8rem; height: 8rem;
+    margin: 1rem auto;
+}
+
+#conteudo textarea {
+    display: block;
+    width: 90%; min-height: 2rem;
+    margin: 1rem auto; padding: .5rem .5rem 1rem .5rem;
+
+    overflow-y: hidden;
+
+    color: var(--IH-gray);
+    font-size: 1em;
+
+    border-radius: 1rem;
+}
+
+#conteudo #botaoPostar {
+    display: block;
+    width: 6rem; height: 1.5rem;
+    margin: 0 0 0 auto;
+
+    font-size: 1em;
+
+    color: var(--IH-blue);
+    background-color: var(--IH-white);
+
+    border-radius: 1rem;
+}
+
+#squareBG {
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    #criacaoPage {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    #cabecalho {
+        justify-content: space-between;
+        min-width: 25rem; width: 35%;
+        max-height: 30rem; height: 80%;
+    }
+
+    #conteudo {
+        display: flex; flex-direction: column;
+        justify-content: space-evenly;
+        width: 65%; height: 100%;
+
+        background: none;
+    }
+
+    #conteudo textarea {
+        min-height: 6rem;
+    }
+
+    #conteudo #previewTitulo {
+        width: 65%;
+        font-size: 1.5em;
+    }
+
+    #conteudo #previewSubtitulo {
+        width: 50%;
+        font-size: 1em;
+    }
+
+    #conteudo #previewMiniatura {
+        width: 12rem; height: 12rem;
+    }
+
+    #conteudo #botaoPostar {
+        width: 10rem; height: 3rem;
+
+        font-size: 1.25em;
+        border-radius: 2rem;
+    }
+
+    #squareBG {
+        display: block;
+        width: 65%; height: 0;
+        
+        position: absolute; z-index: -1;
+        bottom: 0; right: 0;
+        
+        border-bottom: calc(100vh - 3rem) solid var(--IH-blue);
+        border-left: 10rem solid transparent;
+    }
+}
