@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { validarLogin } from "../services/validadores";
 
 import "../styles/formulario.css";
+import usuarioContext from "../context/usuarioCont";
 
 function infosIniciais() {
-  return { email: "", senha: "" };
+  return { apelido: "", senha: "" };
 }
 
 function FormularioLogin() {
   const [loginInfos, setLoginInfos] = useState(infosIniciais);
+  const [ usuario, setUsuario ] = useContext(usuarioContext);
 
   const atualizarForm = (evento) => {
     const [campo, valor] = [evento.target.name, evento.target.value];
@@ -20,18 +23,22 @@ function FormularioLogin() {
 
   const loginHandler = async (evento) => {
     evento.preventDefault();
+    setUsuario({
+      logado: true,
+      ...await validarLogin(loginInfos)
+    })
   };
 
   return (
     <form onSubmit={loginHandler} className="formulario">
-      <label htmlFor="loginEmail">E-mail:</label>
+      <label htmlFor="loginApelido">Apelido:</label>
       <input
-        type="email"
-        name="email"
-        id="loginEmail"
+        type="text"
+        name="apelido"
+        id="loginApelido"
         autoComplete="true"
         onChange={atualizarForm}
-        placeholder="Digite seu E-mail..."
+        placeholder="Digite seu nickname..."
       />
 
       <label htmlFor="loginSenha">Senha:</label>

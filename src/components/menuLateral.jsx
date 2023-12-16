@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom";
+
 import "../styles/menuLateral.css";
 
 function MenuLateral() {
+  const abrirCriacao = useNavigate();
+
   return (
     <nav id="menuLateral">
       <h3>Filtrar postagens</h3>
@@ -32,6 +36,12 @@ function MenuLateral() {
           placeholder="Procurar por..."
         />
         <button type="button">Pesquisar</button>
+      </section>
+      <h4>Crie uma postagem !</h4>
+      <section id="criarPost">
+        <button type="button" onClick={() => abrirCriacao('criar')}>
+          Criar
+        </button>
       </section>
     </nav>
   );

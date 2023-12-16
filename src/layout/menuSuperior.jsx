@@ -10,15 +10,15 @@ function menuSuperior() {
         Info<span>Hud</span>
       </h1>
       <nav id="navigation">
-        <Link to="/" className="">
+        <Link to={"/"} className="">
           Início
         </Link>
 
-        <Link to="postagens" className="">
+        <Link to={"postagens"} className="">
           Postagens
         </Link>
 
-        <Link to="contato" className="">
+        <Link to={"contato"} className="">
           Contato
         </Link>
       </nav>

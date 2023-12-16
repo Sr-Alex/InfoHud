@@ -1,9 +1,8 @@
-import { publicarPost } from "./api";
+import { fazerLogin, publicarPost } from "./api";
 
 const emailRegex = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gm;
 
 export function validarCadastro(formulario) {
-  const emailRegex = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gm;
   return (
     emailRegex.test(formulario.email) &&
     formulario.nome &&
@@ -12,12 +11,35 @@ export function validarCadastro(formulario) {
   );
 }
 
+export async function validarLogin(infos) {
+  const loginTemplate = {
+    apelido: "",
+    senha: "",
+  };
+
+  if (Object.keys(infos).length !== Object.keys(loginTemplate).length) {
+    return console.error("A quantidade de campos não corresponde!");
+  }
+
+  for (const campo of Object.keys(infos)) {
+    if (!Object.keys(loginTemplate).includes(campo) && campo) {
+      return console.error("Os campos não correspondem!");
+    }
+  }
+
+  return fazerLogin({
+    username: infos.apelido,
+    password: infos.senha,
+  });
+}
+
 export function validarPost(post) {
   const postTemplate = {
     titulo: "",
     subtitulo: "",
     miniatura: "",
     conteudo: "",
+    token: ''
   };
 
   if (Object.keys(post).length !== Object.keys(postTemplate).length) {
@@ -30,5 +52,13 @@ export function validarPost(post) {
     }
   }
 
-  return publicarPost(post);
+  return publicarPost({
+    token: post.token,
+    postagem: {
+      titulo: post.titulo,
+      subtitulo: post.subtitulo,
+      miniurl: post.miniatura,
+      conteudo: post.conteudo
+    }
+  });
 }

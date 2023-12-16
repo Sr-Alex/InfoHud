@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import usuarioContext from "../../context/usuarioCont";
 
 import FormularioLogin from "../../components/formularioLogin";
 import FormularioCadastro from "../../components/formularioCadastro";
@@ -8,8 +9,11 @@ import "./loginPage.css";
 function LoginPage() {
   const [mostrarLogin, setMostrarLogin] = useState(true);
 
+  const usuario = useContext(usuarioContext);
+
   const toogleLogin = () => {
     setMostrarLogin(!mostrarLogin);
+    console.log(usuario);
   };
 
   return (

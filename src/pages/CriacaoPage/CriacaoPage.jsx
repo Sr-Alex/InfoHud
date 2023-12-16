@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import usuarioContext from "../../context/usuarioCont";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import "./CriacaoPage.css";
 import imagePlaceholder from "../../images/imagePlaceholder.png";
@@ -14,6 +15,7 @@ function valoresIniciais() {
 }
 
 function CriacaoPage() {
+  const { usuario } = useContext(usuarioContext);
   const [postagem, setPostagem] = useState(valoresIniciais());
   const textAreaRef = useRef("");
 
@@ -40,7 +42,14 @@ function CriacaoPage() {
 
   const postar = (evento) => {
     evento.preventDefault();
-    return validarPost(postagem);
+    if (Object.keys(usuario).includes("access")) {
+      setPostagem({
+        ...postagem,
+        token: usuario.access
+      });
+      return validarPost(postagem)
+    }
+    return console.error("Você precisa estar logado!");
   };
 
   useEffect(resizeTextArea, [postagem.conteudo]);
@@ -108,7 +117,7 @@ function CriacaoPage() {
           rows="10"
         ></textarea>
 
-        <button id="botaoPostar" type="submit">
+        <button type="submit" id="botaoPostar">
           Postar
         </button>
       </section>
