@@ -5,17 +5,19 @@ import MenuLateral from "../../components/menuLateral";
 import Post from "../../components/post";
 
 import "./postagensPage.css";
+import imagePlaceholder from "../../images/imagePlaceholder.png";
 
 function PostagensPage() {
   const [postagensList, setPostagensList] = useState([]);
 
   const carregarPosts = async () => {
     setPostagensList(await buscarPosts())
+    console.log(postagensList);
   }
 
   useEffect(() => {
     carregarPosts()
-  }, []);
+  });
 
   return (
     <section id="postagemPage">
@@ -24,10 +26,10 @@ function PostagensPage() {
         {postagensList.map((post) => (
           <Post
             key={post.id}
-            titulo={post.title}
-            subtitulo="Lorem Ipsum qualquer"
-            subtexto={post.content}
-            miniatura="https://fastly.picsum.photos/id/267/512/512.jpg?hmac=Bv_MCBNQIn7_vUuUmKSEscj7AIPDMQiEGs60--keJwA"
+            titulo={post.titulo}
+            subtitulo={post.subtitulo}
+            subtexto={post.conteudo}
+            miniatura={post.miniurl ? post.miniurl : imagePlaceholder}
           />
         ))}
       </ul>

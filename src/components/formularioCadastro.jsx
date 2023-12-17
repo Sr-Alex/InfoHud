@@ -21,12 +21,11 @@ function FormularioCadastro() {
       ...cadastroInfos,
       [campo]: valor,
     });
-    console.log(cadastroInfos);
   };
 
   const cadastroHandler = async (evento) => {
     evento.preventDefault();
-    return validarCadastro();
+    return validarCadastro(cadastroInfos);
   };
 
   return (
@@ -40,7 +39,7 @@ function FormularioCadastro() {
         onChange={(evento) => atualizarInfos(evento)}
         placeholder="Digite seu nome completo..."
       />
-      <label htmlFor="cadastroNickname">Nome de usuário:</label>
+      <label htmlFor="cadastroNickname">Apelido:</label>
       <input
         type="text"
         name="nickname"

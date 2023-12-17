@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 import "../styles/post.css";
 
 function Post({ titulo, subtitulo, subtexto, miniatura }) {
@@ -16,12 +14,5 @@ function Post({ titulo, subtitulo, subtexto, miniatura }) {
     </li>
   );
 }
-
-Post.propTypes = {
-  titulo: PropTypes.string.isRequired,
-  subtitulo: PropTypes.string.isRequired,
-  subtexto: PropTypes.string.isRequired,
-  miniatura: PropTypes.string,
-};
 
 export default Post;

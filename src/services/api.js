@@ -1,4 +1,14 @@
-const InfoHUdAPI = "https://projeto-infohud-production.up.railway.app";
+const InfoHUdAPI = "https://infohud-api.onrender.com";
+
+const cadastroConfig = (infos) => {
+  return {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(infos),
+  };
+};
 
 const loginConfig = (infos) => {
   return {
@@ -28,8 +38,18 @@ export async function fazerLogin(infos) {
     .catch((error) => console.error("Ocorreu um erro: ", error));
 }
 
+export async function efetuarCadastro(infos) {
+  return await fetch(`${InfoHUdAPI}/Usuarios/`, cadastroConfig(infos))
+    .then((res) => res.json())
+    .then((data) => data)
+    .catch((error) => console.error("Ocorreu um erro no cadastro:", error));
+}
+
 export async function publicarPost(dados) {
-  return await fetch(`${InfoHUdAPI}/postagem/`, postConfig(dados.postagem, dados.token))
+  return await fetch(
+    `${InfoHUdAPI}/postagem/`,
+    postConfig(dados.postagem, dados.token)
+  )
     .then((res) => res.json())
     .then((data) => console.log(data))
     .catch((error) => console.error("Ocorreu um erro: ", error));
@@ -38,6 +58,6 @@ export async function publicarPost(dados) {
 export async function buscarPosts() {
   return await fetch(`${InfoHUdAPI}/postagem/`)
     .then((res) => res.json())
-    .then(data => data)
+    .then((data) => data)
     .catch((error) => console.error("Ocorreu um erro: ", error));
 }

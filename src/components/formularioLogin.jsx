@@ -10,7 +10,7 @@ function infosIniciais() {
 
 function FormularioLogin() {
   const [loginInfos, setLoginInfos] = useState(infosIniciais);
-  const [ usuario, setUsuario ] = useContext(usuarioContext);
+  const { setUsuario } = useContext(usuarioContext);
 
   const atualizarForm = (evento) => {
     const [campo, valor] = [evento.target.name, evento.target.value];
@@ -23,10 +23,7 @@ function FormularioLogin() {
 
   const loginHandler = async (evento) => {
     evento.preventDefault();
-    setUsuario({
-      logado: true,
-      ...await validarLogin(loginInfos)
-    })
+    setUsuario( await validarLogin(loginInfos));
   };
 
   return (

@@ -1,14 +1,33 @@
-import { fazerLogin, publicarPost } from "./api";
+import { efetuarCadastro, fazerLogin, publicarPost } from "./api";
 
 const emailRegex = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gm;
 
-export function validarCadastro(formulario) {
-  return (
-    emailRegex.test(formulario.email) &&
-    formulario.nome &&
-    formulario.nickname &&
-    formulario.senha.length > 6
-  );
+export function validarCadastro(infos) {
+  const cadastroTemplate = {
+    nome: "",
+    nickname: "",
+    email: "",
+    senha: "",
+  };
+
+  if (Object.keys(infos).length !== Object.keys(cadastroTemplate).length) {
+    return console.error("Quantidade de campos não corresponde!");
+  } else if (!emailRegex.test(infos.email)) {
+    return console.error("Email inválido!");
+  }
+
+  for (const campo of Object.keys(infos)) {
+    if (!Object.keys(cadastroTemplate).includes(campo)) {
+      return console.error("Campos não correspondem!");
+    }
+  }
+
+  return efetuarCadastro({
+    "username": infos.nickname,
+    "first_name": infos.nome,
+    "email": infos.email,
+    "password": infos.senha
+  });
 }
 
 export async function validarLogin(infos) {
@@ -39,7 +58,7 @@ export function validarPost(post) {
     subtitulo: "",
     miniatura: "",
     conteudo: "",
-    token: ''
+    token: "",
   };
 
   if (Object.keys(post).length !== Object.keys(postTemplate).length) {
@@ -51,14 +70,14 @@ export function validarPost(post) {
       return console.error("Campos inválidos!");
     }
   }
-
+  console.log(post);
   return publicarPost({
     token: post.token,
     postagem: {
       titulo: post.titulo,
       subtitulo: post.subtitulo,
       miniurl: post.miniatura,
-      conteudo: post.conteudo
-    }
+      conteudo: post.conteudo,
+    },
   });
 }
