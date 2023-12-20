@@ -4,6 +4,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import "./CriacaoPage.css";
 import imagePlaceholder from "../../images/imagePlaceholder.png";
 import { validarPost } from "../../services/validadores";
+import { useNavigate } from "react-router-dom";
 
 function valoresIniciais() {
   return {
@@ -11,12 +12,14 @@ function valoresIniciais() {
     subtitulo: "",
     miniatura: "",
     conteudo: "",
+    criador: ""
   };
 }
 
 function CriacaoPage() {
   const { usuario } = useContext(usuarioContext);
   const [postagem, setPostagem] = useState(valoresIniciais());
+  const direcionar = useNavigate();
   const textAreaRef = useRef("");
 
   const resizeTextArea = () => {
@@ -42,14 +45,19 @@ function CriacaoPage() {
 
   const postar = (evento) => {
     evento.preventDefault();
-    if (Object.keys(usuario).includes("access")) {
-      setPostagem({
+    if (usuario.token){
+      for (const campo of Object.values(usuario)){
+        if (!campo){
+          return console.error("Você precisa estar logado!");
+        }
+      }
+      return validarPost({
         ...postagem,
-        token: usuario.access
+        token: usuario.token,
+        criador: usuario.username
       });
-      return validarPost(postagem)
     }
-    return console.error("Você precisa estar logado!");
+    return direcionar('/login');
   };
 
   useEffect(resizeTextArea, [postagem.conteudo]);

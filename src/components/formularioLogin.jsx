@@ -1,8 +1,10 @@
 import { useContext, useState } from "react";
 import { validarLogin } from "../services/validadores";
+import usuarioContext from "../context/usuarioCont";
 
 import "../styles/formulario.css";
-import usuarioContext from "../context/usuarioCont";
+import { useNavigate } from "react-router-dom";
+import { salvarUsuario } from "../services/storage";
 
 function infosIniciais() {
   return { apelido: "", senha: "" };
@@ -11,6 +13,7 @@ function infosIniciais() {
 function FormularioLogin() {
   const [loginInfos, setLoginInfos] = useState(infosIniciais);
   const { setUsuario } = useContext(usuarioContext);
+  const direcionar = useNavigate();
 
   const atualizarForm = (evento) => {
     const [campo, valor] = [evento.target.name, evento.target.value];
@@ -18,12 +21,33 @@ function FormularioLogin() {
       ...loginInfos,
       [campo]: valor,
     });
-    console.log(loginInfos);
   };
 
   const loginHandler = async (evento) => {
     evento.preventDefault();
-    setUsuario( await validarLogin(loginInfos));
+    try {
+      const login = await validarLogin(loginInfos);
+      switch (login) {
+        case undefined:
+          console.error("Usuário inexistente!");
+          break;
+
+        case "serverError":
+          console.error("Servidor inativo para a ação de login.");
+          break;
+
+        case "accessoNãoAutorizado":
+          console.error("Senha incorreta!");
+          break;
+
+        default:
+          setUsuario(login);
+          salvarUsuario(login);
+          direcionar("/postagens");
+      }
+    } catch (erro) {
+      console.error(erro);
+    }
   };
 
   return (
@@ -48,9 +72,7 @@ function FormularioLogin() {
         placeholder="Digite sua senha..."
       />
 
-      <button type="submit">
-        Entrar
-      </button>
+      <button type="submit">Entrar</button>
     </form>
   );
 }

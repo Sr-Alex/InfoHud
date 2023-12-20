@@ -59,6 +59,7 @@ export function validarPost(post) {
     miniatura: "",
     conteudo: "",
     token: "",
+    criador: ""
   };
 
   if (Object.keys(post).length !== Object.keys(postTemplate).length) {
@@ -78,6 +79,7 @@ export function validarPost(post) {
       subtitulo: post.subtitulo,
       miniurl: post.miniatura,
       conteudo: post.conteudo,
+      user_nickname: post.criador
     },
   });
 }

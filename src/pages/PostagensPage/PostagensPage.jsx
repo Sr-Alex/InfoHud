@@ -12,12 +12,11 @@ function PostagensPage() {
 
   const carregarPosts = async () => {
     setPostagensList(await buscarPosts())
-    console.log(postagensList);
   }
 
   useEffect(() => {
-    carregarPosts()
-  });
+    carregarPosts();
+  }, []);
 
   return (
     <section id="postagemPage">

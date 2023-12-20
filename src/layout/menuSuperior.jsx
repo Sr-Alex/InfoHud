@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 
-import "../styles/menuSuperior.css";
 import { FaSearch } from "react-icons/fa";
+import Logo from "../components/logo";
+
+import "../styles/menuSuperior.css";
 
 function menuSuperior() {
   return (
     <header id="menuSuperior">
-      <h1 id="logo">
-        Info<span>Hud</span>
-      </h1>
+      <Logo/>
       <nav id="navigation">
         <Link to={"/"} className="">
           Início

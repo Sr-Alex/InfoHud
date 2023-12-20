@@ -1,9 +1,18 @@
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import usuarioContext from "../context/usuarioCont";
 
 import "../styles/menuLateral.css";
 
 function MenuLateral() {
-  const abrirCriacao = useNavigate();
+  const { usuario } = useContext(usuarioContext);
+  const direcionar = useNavigate();
+
+  const handleCriacao = () => {
+    if (usuario.token && usuario.username){
+      return direcionar('/postagens/criar');
+    }
+  }
 
   return (
     <nav id="menuLateral">
@@ -39,7 +48,7 @@ function MenuLateral() {
       </section>
       <h4>Crie uma postagem !</h4>
       <section id="criarPost">
-        <button type="button" onClick={() => abrirCriacao('criar')}>
+        <button type="button" onClick={handleCriacao}>
           Criar
         </button>
       </section>

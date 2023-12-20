@@ -1,20 +1,27 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import usuarioContext from "../../context/usuarioCont";
 
 import FormularioLogin from "../../components/formularioLogin";
 import FormularioCadastro from "../../components/formularioCadastro";
 
 import "./loginPage.css";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const [mostrarLogin, setMostrarLogin] = useState(true);
-
-  const usuario = useContext(usuarioContext);
+  const { usuario } = useContext(usuarioContext);
+  const direcionar = useNavigate();
 
   const toogleLogin = () => {
     setMostrarLogin(!mostrarLogin);
-    console.log(usuario);
   };
+
+  useEffect(() => {
+    if (usuario.token && usuario.username) {
+      console.log("redirecionando...");
+      direcionar('/postagens');
+    }
+  },[]);
 
   return (
     <section className={`loginPage ${mostrarLogin ? "login" : "cadastro"}`}>

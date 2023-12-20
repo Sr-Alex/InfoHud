@@ -5,11 +5,15 @@
 
 #showPostagens {
     width: 100%; height: 100%;
-    overflow-y: auto;
+    padding: 1rem 0;
 }
 
 @media (min-width: 1024px) {
     #postagemPage {
         flex-direction: row;
+    }
+
+    #showPostagens {
+        padding: 1rem;
     }
 }

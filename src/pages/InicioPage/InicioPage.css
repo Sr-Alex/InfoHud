@@ -1,0 +1,100 @@
+#inicioPage {
+    display: flex; flex-direction: column;
+    width: 100%; height: calc(100vh - 3rem);
+}
+
+#bemVindo {
+    width: 100%; height: 50%;
+    padding: 2rem 1rem;
+
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+#bemVindo #logo {
+    font-size: 2em;
+    margin: 1rem 0;
+}
+
+#imgBG {
+    width: 100%; height: 50%;
+    position: absolute; z-index: -2;
+
+    overflow: hidden;
+
+    transform-style: preserve-3d;
+    perspective-origin: left;
+    perspective: 250px;
+}
+
+#imgBG img {
+    transform: rotateZ(45deg) rotateY(160deg) translateX(50px);
+}
+
+#aproveite {
+    display: flex; flex-direction: column;
+    justify-content: space-evenly;
+
+    width: 100%; height: 50%;
+    padding: 1rem;
+
+    text-align: end;
+
+    color: var(--IH-white);
+    background-color: var(--IH-blue);
+}
+
+#aproveite h2 {
+    margin: 1rem 0;
+}
+
+#campoNotificacao {
+    max-width: 16rem; width: 50%; 
+    height: 6rem;
+    margin: 2rem 0 2rem auto;
+    
+    background-color: var(--IH-white);
+    border-radius: 1rem;
+}
+
+#square {
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    #inicioPage {
+        flex-direction: row;
+    }
+    #bemVindo {
+        width: 50%; height: 100%;
+    }
+    #aproveite {
+        width: 50%; height: 100%;
+        background: none;
+
+        font-size: 1.2em;
+    }
+
+    #campoNotificacao {
+        height: 8rem;
+    }
+
+    #imgBG {
+        width: 65%; height: calc(100vh - 3rem);
+    }
+
+    #imgBG img {
+        transform: rotateZ(45deg) rotateY(160deg) translateX(70px) translateZ(16px);
+    }
+
+    #square {
+        display: block;
+        width: 60%; height: 0;
+
+        position: absolute; z-index: -1;
+        bottom: 0; right: 0;
+
+        border-bottom: calc(100vh - 3rem) solid var(--IH-blue);
+        border-left: 15rem solid transparent;
+    }
+}

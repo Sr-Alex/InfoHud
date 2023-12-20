@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { validarCadastro } from "../services/validadores";
 
 import "../styles/formulario.css";
+import usuarioContext from "../context/usuarioCont";
+import { useNavigate } from "react-router-dom";
 
 function infosIniciais() {
   return {
@@ -14,6 +16,8 @@ function infosIniciais() {
 
 function FormularioCadastro() {
   const [cadastroInfos, setCadastroInfos] = useState(infosIniciais);
+  const { usuario } = useContext(usuarioContext);
+  const direcionar = useNavigate();
 
   const atualizarInfos = (evento) => {
     const [campo, valor] = [evento.target.name, evento.target.value];
@@ -25,6 +29,9 @@ function FormularioCadastro() {
 
   const cadastroHandler = async (evento) => {
     evento.preventDefault();
+    if(usuario.token && usuario.username){
+      return direcionar('/postagens');
+    }
     return validarCadastro(cadastroInfos);
   };
 

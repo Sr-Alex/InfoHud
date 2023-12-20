@@ -2,14 +2,14 @@
     display: flex; flex-direction: row;
     justify-content: space-between; align-items: center;
     width: 100%; height: 10rem;
-    padding: .5rem 1rem;
+    padding: .5rem 1rem; margin: 0 0 1rem 0;
 
     background-color: var(--IH-white);
 }
 
-.post figure {
-    width: 9rem; 
-    max-height: 10rem; height: 100%;
+.post figure { 
+    max-height: 10rem; width: 6rem;
+    height: 6rem;
 
     border-radius: 1rem;
 }
@@ -42,4 +42,19 @@
 
     white-space: nowrap;
     overflow: hidden;
+}
+
+#post:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 10px var(--IH-blue);
+}
+
+@media (min-width: 1024px) {
+    .post {
+        border-radius: 1.5rem;
+    }
+
+    .post figure { 
+        width: 8rem; height: 8rem;
+    }
 }
