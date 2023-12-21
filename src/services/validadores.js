@@ -1,6 +1,6 @@
 import { efetuarCadastro, fazerLogin, publicarPost } from "./api";
 
-const emailRegex = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gm;
+const emailRegex = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
 
 export function validarCadastro(infos) {
   const cadastroTemplate = {
@@ -71,7 +71,6 @@ export function validarPost(post) {
       return console.error("Campos inválidos!");
     }
   }
-  console.log(post);
   return publicarPost({
     token: post.token,
     postagem: {

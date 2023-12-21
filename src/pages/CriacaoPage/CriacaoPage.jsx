@@ -2,7 +2,7 @@ import usuarioContext from "../../context/usuarioCont";
 import { useContext, useEffect, useRef, useState } from "react";
 
 import "./CriacaoPage.css";
-import imagePlaceholder from "../../images/imagePlaceholder.png";
+import imagePlaceholder from "../../assets/imagePlaceholder.png";
 import { validarPost } from "../../services/validadores";
 import { useNavigate } from "react-router-dom";
 
@@ -51,11 +51,22 @@ function CriacaoPage() {
           return console.error("Você precisa estar logado!");
         }
       }
-      return validarPost({
+      const upPost = validarPost({
         ...postagem,
         token: usuario.token,
         criador: usuario.username
       });
+      switch (upPost) {
+        case 'accessoNãoAutorizado':
+          return console.error('Você não possui autorização para postar.');
+
+        case 'serverError':
+          return console.error('Servidor inativo para esta ação.');
+
+        default:
+          console.log('Post criado com sucesso!');
+          return direcionar('/postagens')
+      }
     }
     return direcionar('/login');
   };

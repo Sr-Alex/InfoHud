@@ -1,16 +1,33 @@
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import usuarioContext from "../context/usuarioCont";
 
 import "../styles/menuLateral.css";
 
-function MenuLateral() {
+function MenuLateral({ state, setState, resetPosts }) {
   const { usuario } = useContext(usuarioContext);
+  const inputPesquisar = useRef();
   const direcionar = useNavigate();
 
-  const handleCriacao = () => {
+  const handleBotaoCriacao = () => {
     if (usuario.token && usuario.username){
       return direcionar('/postagens/criar');
+    }
+  };
+
+  const handleBotaoBuscar = () => {
+    const filtroValor = inputPesquisar.current.value;
+    console.log(state);
+    if (filtroValor.trim()) {
+      setState(
+        state.filter(item => item.titulo.toLowerCase().includes(filtroValor)
+        || item.subtitulo.toLowerCase().includes(filtroValor)
+        || item.conteudo.toLowerCase().includes(filtroValor)
+        || item.user_nickname.includes(filtroValor))
+      );
+    }else {
+      inputPesquisar.current.value = '';
+      resetPosts();
     }
   }
 
@@ -39,16 +56,17 @@ function MenuLateral() {
       <h4>Procurar por</h4>
       <section id="pesquisarLateral">
         <input
+          ref={inputPesquisar}
           type="search"
           name="searchPost"
           id="searchPost"
           placeholder="Procurar por..."
         />
-        <button type="button">Pesquisar</button>
+        <button type="button" onClick={handleBotaoBuscar}>Pesquisar</button>
       </section>
       <h4>Crie uma postagem !</h4>
       <section id="criarPost">
-        <button type="button" onClick={handleCriacao}>
+        <button type="button" onClick={handleBotaoCriacao}>
           Criar
         </button>
       </section>

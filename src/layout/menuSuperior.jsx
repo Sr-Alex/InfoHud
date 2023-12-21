@@ -8,7 +8,7 @@ import "../styles/menuSuperior.css";
 function menuSuperior() {
   return (
     <header id="menuSuperior">
-      <Logo/>
+      <Logo />
       <nav id="navigation">
         <Link to={"/"} className="">
           Início
@@ -23,7 +23,12 @@ function menuSuperior() {
         </Link>
       </nav>
       <div id="pesquisar">
-        <input type="search" name="searcher" id="searcher" />
+        <input
+          type="search"
+          name="searcher"
+          id="searcher"
+          placeholder="Pesquisar por post..."
+        />
         <button>
           <FaSearch />
         </button>

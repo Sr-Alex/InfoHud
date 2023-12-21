@@ -24,7 +24,7 @@ const postConfig = (token, data) => {
   return {
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
@@ -34,8 +34,8 @@ const postConfig = (token, data) => {
 export async function fazerLogin(infos) {
   return await fetch(`${InfoHUdAPI}/login/`, loginConfig(infos))
     .then((res) => {
-      console.log(res.status)
-      switch (res.status) { 
+      console.log(res.status);
+      switch (res.status) {
         case 200:
           return res.json();
         case 401:
@@ -44,19 +44,19 @@ export async function fazerLogin(infos) {
         case 404:
           return undefined;
 
-        case 500: 
-          return 'serverError';
-      
+        case 500:
+          return "serverError";
+
         default:
           throw new Error("Algo deu errado na requisição: código ", res.status);
       }
     })
     .then((data) => {
-      if (typeof(data) === Object)
-      return {
-        apelido: data.username,
-        token: data.token
-      }
+      if (typeof data === Object)
+        return {
+          apelido: data.username,
+          token: data.token,
+        };
       return data;
     })
     .catch((error) => console.error("Ocorreu um erro: ", error));
@@ -75,16 +75,38 @@ export async function publicarPost(dados) {
     postConfig(dados.token, dados.postagem)
   )
     .then((res) => {
-      console.log(res.status);
-      return res.json();
+      switch (res.status) {
+        case 201:
+          return res.json();
+
+        case 500:
+          return "serverError";
+
+        default:
+          break;
+      }
     })
-    .then((data) => console.log(data))
+    .then((data) => data)
     .catch((error) => console.error("Ocorreu um erro: ", error));
 }
 
 export async function buscarPosts() {
   return await fetch(`${InfoHUdAPI}/postagem/`)
-    .then((res) => res.json())
+    .then((res) => {
+      switch (res.status) {
+        case 200:
+          return res.json();
+
+        case 404:
+          return undefined;
+
+        case 500:
+          return "serverError";
+
+        default:
+          throw new Error("Algo deu errado na requisição: código", res.status);
+      }
+    })
     .then((data) => data)
     .catch((error) => console.error("Ocorreu um erro: ", error));
 }

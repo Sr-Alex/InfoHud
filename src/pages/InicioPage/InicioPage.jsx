@@ -1,13 +1,19 @@
 import { useContext } from 'react';
-import Logo from '../../components/logo';
+import { useNavigate } from 'react-router-dom';
 import usuarioContext from '../../context/usuarioCont';
 
 import './InicioPage.css';
-import logosInicio from '../../images/logosInicio.png'
+import logosInicio from '../../assets/logosInicio.png'
+import Logo from '../../components/logo';
 
 function InicioPage() {
 
     const { usuario } = useContext(usuarioContext);
+    const direcionar = useNavigate();
+
+    const handleBotaoLogin = () => {
+        direcionar('/login');
+    }
 
     return (
         <main id="inicioPage">
@@ -26,10 +32,21 @@ function InicioPage() {
                         : 'Bem-vindo(a)!'
                     }
                 </h2>
-                <div id='campoNotificacao'></div>
                 <p>
                 Aproveite a plataforma compartilhando conhecimento sobre sua área favorita da programação!
                 </p>
+                <div id='campoDeAcao'>
+                    {
+                        usuario.username
+                        ? 'Aqui estará uma notificação'
+                        : (
+                            <div>
+                                <h4>Faça login login para fazer parte!</h4>
+                                <button onClick={handleBotaoLogin}>Login</button>
+                            </div>
+                        )
+                    }
+                </div>
                 <div id="square"></div>
             </section>
         </main>
