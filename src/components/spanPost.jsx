@@ -9,10 +9,18 @@ function SpanPost({
   categoria,
   criador,
 }) {
+  const handleMiniaturaError = (evento) => {
+    evento.target.src = imagePlaceholder;
+  };
+
   return (
     <li className="post">
       <figure>
-        <img src={miniatura} onError={imagePlaceholder} alt={titulo} />
+        <img
+          src={miniatura}
+          onError={(evento) => handleMiniaturaError(evento)}
+          alt={titulo}
+        />
       </figure>
       <section id="conteudoPost">
         <div>

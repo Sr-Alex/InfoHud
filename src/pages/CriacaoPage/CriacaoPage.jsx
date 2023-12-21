@@ -35,7 +35,7 @@ function CriacaoPage() {
     });
   };
 
-  const miniaturaPadrao = (evento) => {
+  const handleMiniaturaError = (evento) => {
     evento.target.src = imagePlaceholder;
     setPostagem({
       ...postagem,
@@ -112,7 +112,7 @@ function CriacaoPage() {
             <img
               src={postagem.miniatura}
               alt="preview da miniatura"
-              onError={(evento) => miniaturaPadrao(evento)}
+              onError={(evento) => handleMiniaturaError(evento)}
             />
           </figure>
         </div>
