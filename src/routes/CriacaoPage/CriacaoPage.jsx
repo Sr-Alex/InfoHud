@@ -1,10 +1,10 @@
-import usuarioContext from "../../context/usuarioCont";
 import { useContext, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import usuarioContext from "../../context/usuarioCont";
 
 import "./CriacaoPage.css";
 import imagePlaceholder from "../../assets/imagePlaceholder.png";
 import { validarPost } from "../../services/validadores";
-import { useNavigate } from "react-router-dom";
 
 function valoresIniciais() {
   return {
@@ -12,7 +12,7 @@ function valoresIniciais() {
     subtitulo: "",
     miniatura: "",
     conteudo: "",
-    criador: ""
+    criador: "",
   };
 }
 
@@ -25,6 +25,19 @@ function CriacaoPage() {
   const resizeTextArea = () => {
     textAreaRef.current.style.height = "0px";
     textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px";
+  };
+
+  const verificarUsuario = () => {
+    if (usuario.token) {
+      for (const campo in Object.values(usuario)) {
+        if (!campo) {
+          return false;
+        }
+      }
+      return true;
+    } else {
+      return false;
+    }
   };
 
   const atualizarPostagem = (evento) => {
@@ -45,30 +58,27 @@ function CriacaoPage() {
 
   const postar = (evento) => {
     evento.preventDefault();
-    if (usuario.token){
-      for (const campo of Object.values(usuario)){
-        if (!campo){
-          return console.error("Você precisa estar logado!");
-        }
-      }
+    if (verificarUsuario()) {
       const upPost = validarPost({
         ...postagem,
         token: usuario.token,
-        criador: usuario.username
+        criador: usuario.username,
       });
-      switch (upPost) {
-        case 'accessoNãoAutorizado':
-          return console.error('Você não possui autorização para postar.');
 
-        case 'serverError':
-          return console.error('Servidor inativo para esta ação.');
+      switch (upPost) {
+        case "accessoNãoAutorizado":
+          return console.error("Você não possui autorização para postar.");
+
+        case "serverError":
+          return console.error("Servidor inativo para esta ação.");
 
         default:
-          console.log('Post criado com sucesso!');
-          return direcionar('/postagens')
+          console.log("Post criado com sucesso!");
+          return direcionar("/postagens");
       }
+    } else {
+      return direcionar("/login");
     }
-    return direcionar('/login');
   };
 
   useEffect(resizeTextArea, [postagem.conteudo]);

@@ -1,5 +1,5 @@
-import "../styles/post.css";
-import imagePlaceholder from "../assets/imagePlaceholder.png";
+import "./SpanPost.css";
+import imagePlaceholder from "../../assets/imagePlaceholder.png";
 
 function SpanPost({
   titulo,

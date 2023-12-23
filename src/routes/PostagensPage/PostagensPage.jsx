@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { buscarPosts } from "../../services/api";
 
-import MenuLateral from "../../components/menuLateral";
-import SpanPost from "../../components/spanPost";
-import IconVazio from "../../components/iconVazio";
+import MenuLateral from "../../components/MenuLateral/MenuLateral";
+import SpanPost from "../../components/SpanPost/SpanPost";
+import IconErro from "../../components/IconErro/IconErro";
 
-import "./postagensPage.css";
+import "./PostagensPage.css";
 import imagePlaceholder from "../../assets/imagePlaceholder.png";
 
 function PostagensPage() {
@@ -52,7 +52,7 @@ function PostagensPage() {
             />
           ))
         ) : (
-          <IconVazio mensagem="Nenhum post encontrado." />
+          <IconErro mensagem="Nenhum post encontrado." />
         )}
       </ul>
     </section>

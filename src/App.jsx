@@ -1,35 +1,33 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import usuarioContext from "./context/usuarioCont";
-import { loginAutomatico } from "./services/storage"
+import { loginAutomatico } from "./services/storage";
 
-import MenuSuperior from "./layout/menuSuperior";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import PostagensPage from "./pages/PostagensPage/PostagensPage";
-import CriacaoPage from "./pages/CriacaoPage/CriacaoPage";
-import InicioPage from "./pages/InicioPage/InicioPage";
+import MenuSuperior from "./layout/MenuSuperior/MenuSuperior";
+
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [usuario, setUsuario] = useState({
-    username: '',
-    token: '',
-  });      
+    username: "",
+    token: "",
+  });
+  const [ montado, setMontado ] = useState(false);
 
   useEffect(() => {
-    loginAutomatico(setUsuario);
-  },[])
+    if(!montado) {
+      setMontado(true);
+    } else {
+      loginAutomatico(setUsuario);
+    }
+  }, [montado])
 
   return (
-    <usuarioContext.Provider value={{usuario, setUsuario}}>
-      <BrowserRouter>
-      <MenuSuperior/>
-        <Routes>
-          <Route exact path="/" element={<InicioPage/>} /> 
-          <Route path="/login" element={<LoginPage/>} />
-          <Route path="/postagens" element={<PostagensPage/>} />
-          <Route path="/postagens/criar" element={<CriacaoPage/>} />
-        </Routes>
-      </BrowserRouter>
+    <usuarioContext.Provider value={{ usuario, setUsuario }}>
+      <MenuSuperior />
+      <Outlet />
+      <ToastContainer position="bottom-right" draggable={true} draggableDirection="y"/>
     </usuarioContext.Provider>
   );
 }

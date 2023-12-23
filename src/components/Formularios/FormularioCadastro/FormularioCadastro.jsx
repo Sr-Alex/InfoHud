@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
-import { validarCadastro } from "../services/validadores";
+import { validarCadastro } from "../../../services/validadores";
 
-import "../styles/formulario.css";
-import usuarioContext from "../context/usuarioCont";
+import "../Formulario.css";
+import usuarioContext from "../../../context/usuarioCont";
 import { useNavigate } from "react-router-dom";
 
 function infosIniciais() {

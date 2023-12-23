@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
-import { validarLogin } from "../services/validadores";
-import usuarioContext from "../context/usuarioCont";
+import { validarLogin } from "../../../services/validadores";
+import usuarioContext from "../../../context/usuarioCont";
 
-import "../styles/formulario.css";
+import "../Formulario.css";
 import { useNavigate } from "react-router-dom";
-import { salvarUsuario } from "../services/storage";
+import { salvarUsuario } from "../../../services/storage";
 
 function infosIniciais() {
   return { apelido: "", senha: "" };

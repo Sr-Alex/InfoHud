@@ -1,8 +1,8 @@
 import { useState, useContext, useEffect } from "react";
 import usuarioContext from "../../context/usuarioCont";
 
-import FormularioLogin from "../../components/formularioLogin";
-import FormularioCadastro from "../../components/formularioCadastro";
+import FormularioLogin from "../../components/Formularios/FormularioLogin/FormularioLogin";
+import FormularioCadastro from "../../components/Formularios/FormularioCadastro/FormularioCadastro";
 
 import "./loginPage.css";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +21,7 @@ function LoginPage() {
       console.log("redirecionando...");
       direcionar('/postagens');
     }
-  },[]);
+  },[direcionar, usuario.username, usuario.token]);
 
   return (
     <section className={`loginPage ${mostrarLogin ? "login" : "cadastro"}`}>

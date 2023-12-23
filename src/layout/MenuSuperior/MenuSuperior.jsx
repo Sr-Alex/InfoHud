@@ -1,11 +1,29 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { toast } from 'react-toastify';
+
 import { FaSearch } from "react-icons/fa";
-import Logo from "../components/logo";
+import Logo from "../../components/Logo/Logo";
 
-import "../styles/menuSuperior.css";
+import "./MenuSuperior.css";
 
-function menuSuperior() {
+function MenuSuperior() {
+  const [ montado, setMontado ] = useState(false);
+
+  const notificar = () => toast('Novas postagens o aguardam!', {
+    autoClose: 10000,
+    closeOnClick: false,
+  });
+
+  useEffect(() => {
+    if(!montado){
+      setMontado(true);
+    } else {
+      notificar()
+    }
+  }, [montado]);
+  
   return (
     <header id="menuSuperior">
       <Logo />
@@ -37,4 +55,4 @@ function menuSuperior() {
   );
 }
 
-export default menuSuperior;
+export default MenuSuperior;

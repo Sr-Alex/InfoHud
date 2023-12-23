@@ -4,12 +4,12 @@ import usuarioContext from '../../context/usuarioCont';
 
 import './InicioPage.css';
 import logosInicio from '../../assets/logosInicio.png'
-import Logo from '../../components/logo';
+import Logo from '../../components/Logo/Logo';
 
 function InicioPage() {
-
     const { usuario } = useContext(usuarioContext);
     const direcionar = useNavigate();
+
 
     const handleBotaoLogin = () => {
         direcionar('/login');
@@ -37,9 +37,7 @@ function InicioPage() {
                 </p>
                 <div id='campoDeAcao'>
                     {
-                        usuario.username
-                        ? 'Aqui estará uma notificação'
-                        : (
+                        !usuario.username &&  (
                             <div>
                                 <h4>Faça login login para fazer parte!</h4>
                                 <button onClick={handleBotaoLogin}>Login</button>

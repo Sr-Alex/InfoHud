@@ -1,4 +1,4 @@
-#iconVazio {
+#iconErro {
     display: block;
     width: 16rem; height: auto;
     padding: 1.5rem 1rem;
@@ -11,12 +11,12 @@
     border-radius: 1rem;
 }
 
-#iconVazio figure{
+#iconErro figure{
     width: 6rem; height: 6rem;
     margin: 0 auto;
 }
 
-#iconVazio h4 {
+#iconErro h4 {
     text-align: center;
     margin: 1rem auto;
 }

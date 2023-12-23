@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useContext, useRef } from "react";
-import usuarioContext from "../context/usuarioCont";
+import usuarioContext from "../../context/usuarioCont";
 
-import "../styles/menuLateral.css";
+import "./MenuLateral.css";
 
 function MenuLateral({ state, setState, resetPosts }) {
   const { usuario } = useContext(usuarioContext);
