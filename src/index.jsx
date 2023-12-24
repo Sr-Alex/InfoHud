@@ -8,7 +8,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import InicioPage from './routes/InicioPage/InicioPage';
 import LoginPage from './routes/LoginPage/LoginPage';
 import PostagensPage from './routes/PostagensPage/PostagensPage';
-import CriacaoPage from './routes/CriacaoPage/CriacaoPage';
+import CriarPostPage from './routes/CriacaoPage/CriarPostPage';
 
 const router= createBrowserRouter([
   {
@@ -29,7 +29,7 @@ const router= createBrowserRouter([
       },
       {
         path: 'postagens/criar',
-        element: <CriacaoPage/>
+        element: <CriarPostPage/>
       },
     ],
   }

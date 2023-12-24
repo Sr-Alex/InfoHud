@@ -9,6 +9,6 @@ export function loginAutomatico(setState) {
 export function salvarUsuario(infos) {
     if (Object.values(infos).every(campo => campo)){
         console.log('Login atualizado.');
-        return localStorage.setItem('usuarioStorage', JSON.stringify(infos));
+        localStorage.setItem('usuarioStorage', JSON.stringify(infos));
     }
 }

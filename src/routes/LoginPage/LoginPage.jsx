@@ -1,27 +1,16 @@
-import { useState, useContext, useEffect } from "react";
-import usuarioContext from "../../context/usuarioCont";
+import { useState } from "react";
 
 import FormularioLogin from "../../components/Formularios/FormularioLogin/FormularioLogin";
 import FormularioCadastro from "../../components/Formularios/FormularioCadastro/FormularioCadastro";
 
-import "./loginPage.css";
-import { useNavigate } from "react-router-dom";
+import "./LoginPage.css";
 
 function LoginPage() {
   const [mostrarLogin, setMostrarLogin] = useState(true);
-  const { usuario } = useContext(usuarioContext);
-  const direcionar = useNavigate();
 
   const toogleLogin = () => {
     setMostrarLogin(!mostrarLogin);
   };
-
-  useEffect(() => {
-    if (usuario.token && usuario.username) {
-      console.log("redirecionando...");
-      direcionar('/postagens');
-    }
-  },[direcionar, usuario.username, usuario.token]);
 
   return (
     <section className={`loginPage ${mostrarLogin ? "login" : "cadastro"}`}>
@@ -36,7 +25,7 @@ function LoginPage() {
             ? "Ainda não faz parte?"
             : "Já faz parte da comunidade?"}
           <button onClick={toogleLogin}>
-            {mostrarLogin ? "Cadastre-se" : "Entrar"}
+            {mostrarLogin ? "Cadastre-se" : "Entarar"}
           </button>
         </span>
       </section>

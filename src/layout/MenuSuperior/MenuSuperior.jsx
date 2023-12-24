@@ -1,7 +1,4 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-import { toast } from 'react-toastify';
 
 import { FaSearch } from "react-icons/fa";
 import Logo from "../../components/Logo/Logo";
@@ -9,21 +6,6 @@ import Logo from "../../components/Logo/Logo";
 import "./MenuSuperior.css";
 
 function MenuSuperior() {
-  const [ montado, setMontado ] = useState(false);
-
-  const notificar = () => toast('Novas postagens o aguardam!', {
-    autoClose: 10000,
-    closeOnClick: false,
-  });
-
-  useEffect(() => {
-    if(!montado){
-      setMontado(true);
-    } else {
-      notificar()
-    }
-  }, [montado]);
-  
   return (
     <header id="menuSuperior">
       <Logo />

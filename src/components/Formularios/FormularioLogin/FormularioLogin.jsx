@@ -1,14 +1,13 @@
 import { useContext, useState } from "react";
 import { validarLogin } from "../../../services/validadores";
 import usuarioContext from "../../../context/usuarioCont";
+import { toast } from "react-toastify";
 
 import "../Formulario.css";
 import { useNavigate } from "react-router-dom";
 import { salvarUsuario } from "../../../services/storage";
 
-function infosIniciais() {
-  return { apelido: "", senha: "" };
-}
+const infosIniciais = { apelido: "", senha: "" };
 
 function FormularioLogin() {
   const [loginInfos, setLoginInfos] = useState(infosIniciais);
@@ -25,29 +24,58 @@ function FormularioLogin() {
 
   const loginHandler = async (evento) => {
     evento.preventDefault();
-    try {
-      const login = await validarLogin(loginInfos);
-      switch (login) {
-        case undefined:
-          console.error("Usuário inexistente!");
-          break;
+    
+    const notificarId = toast.loading("Fazendo login...");
 
-        case "serverError":
-          console.error("Servidor inativo para a ação de login.");
-          break;
+    validarLogin(loginInfos)
+      .then((res) => {
+        switch (res) {
+          case undefined:
+            toast.update(notificarId, {
+              type: "warning",
+              render: "Usuário não inexistente!",
+              isLoading: false,
+              autoClose: 5000,
+            });
+            console.error("Usuário inexistente!");
+            break;
 
-        case "accessoNãoAutorizado":
-          console.error("Senha incorreta!");
-          break;
+          case "serverError":
+            toast.update(notificarId, {
+              type: "error",
+              render: "Servidor inativo para esta ação!",
+              isLoading: false,
+              autoClose: 5000,
+            });
+            console.error("Servidor inativo para a ação de login.");
+            break;
 
-        default:
-          setUsuario(login);
-          salvarUsuario(login);
-          direcionar("/postagens");
-      }
-    } catch (erro) {
-      console.error(erro);
-    }
+          case "accessoNãoAutorizado":
+            console.error("Senha incorreta!");
+            break;
+
+          default:
+            toast.update(notificarId, {
+              type: "success",
+              render: "Você está logado. Aproveite!",
+              isLoading: false,
+              closeOnClick: true,
+              autoClose: 3000
+            });
+            setUsuario(res);
+            salvarUsuario(res);
+            direcionar("/postagens");
+        }
+      })
+      .catch((erro) => {
+        toast.update(notificarId, {
+          type: "error",
+          render: "Algo deu errado com a requisição.",
+          isLoading: false,
+          autoClose: 5000,
+        });
+        console.error(`Algo deu errado com a requisição: ${erro}`);
+      });
   };
 
   return (

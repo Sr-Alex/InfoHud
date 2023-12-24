@@ -23,10 +23,10 @@ export function validarCadastro(infos) {
   }
 
   return efetuarCadastro({
-    "username": infos.nickname,
-    "first_name": infos.nome,
-    "email": infos.email,
-    "password": infos.senha
+    username: infos.nickname,
+    first_name: infos.nome,
+    email: infos.email,
+    password: infos.senha,
   });
 }
 
@@ -59,7 +59,7 @@ export function validarPost(post) {
     miniatura: "",
     conteudo: "",
     token: "",
-    criador: ""
+    criador: "",
   };
 
   if (Object.keys(post).length !== Object.keys(postTemplate).length) {
@@ -67,10 +67,11 @@ export function validarPost(post) {
   }
 
   for (const campo of Object.keys(post)) {
-    if (!Object.keys(postTemplate).includes(campo) && campo) {
+    if (!Object.keys(postTemplate).includes(campo)) {
       return console.error("Campos inválidos!");
     }
   }
+  console.log(post);
   return publicarPost({
     token: post.token,
     postagem: {
@@ -78,7 +79,7 @@ export function validarPost(post) {
       subtitulo: post.subtitulo,
       miniurl: post.miniatura,
       conteudo: post.conteudo,
-      user_nickname: post.criador
+      user_nickname: post.criador,
     },
   });
 }

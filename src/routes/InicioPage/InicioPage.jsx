@@ -1,6 +1,7 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import usuarioContext from '../../context/usuarioCont';
+import { toast } from 'react-toastify';
 
 import './InicioPage.css';
 import logosInicio from '../../assets/logosInicio.png'
@@ -8,12 +9,27 @@ import Logo from '../../components/Logo/Logo';
 
 function InicioPage() {
     const { usuario } = useContext(usuarioContext);
+    const [ montado, setMontado ] = useState(false);
     const direcionar = useNavigate();
 
+    const notifyLogado = () => toast('Novas postagens aguardam por você!', {
+        type: 'info',
+        autoClose: 5000,
+    })
 
     const handleBotaoLogin = () => {
         direcionar('/login');
     }
+
+    useEffect(() => {
+        if(!montado) {
+            setMontado(true);
+        } else {
+            if(usuario.username && usuario.token){
+                notifyLogado();
+            }
+        }
+    }, [montado, usuario.username, usuario.token]);
 
     return (
         <main id="inicioPage">

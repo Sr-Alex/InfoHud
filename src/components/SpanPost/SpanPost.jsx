@@ -14,7 +14,7 @@ function SpanPost({
   };
 
   return (
-    <li className="post">
+    <li className="spanPost">
       <figure>
         <img
           src={miniatura}

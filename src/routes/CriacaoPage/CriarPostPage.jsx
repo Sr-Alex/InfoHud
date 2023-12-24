@@ -2,9 +2,10 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import usuarioContext from "../../context/usuarioCont";
 
-import "./CriacaoPage.css";
+import "./CriarPostPage.css";
 import imagePlaceholder from "../../assets/imagePlaceholder.png";
 import { validarPost } from "../../services/validadores";
+import { toast } from "react-toastify";
 
 function valoresIniciais() {
   return {
@@ -16,7 +17,7 @@ function valoresIniciais() {
   };
 }
 
-function CriacaoPage() {
+function CriarPostPage() {
   const { usuario } = useContext(usuarioContext);
   const [postagem, setPostagem] = useState(valoresIniciais());
   const direcionar = useNavigate();
@@ -27,18 +28,7 @@ function CriacaoPage() {
     textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px";
   };
 
-  const verificarUsuario = () => {
-    if (usuario.token) {
-      for (const campo in Object.values(usuario)) {
-        if (!campo) {
-          return false;
-        }
-      }
-      return true;
-    } else {
-      return false;
-    }
-  };
+  const verificarUsuario = () => Object.values(usuario).every((campo) => campo);
 
   const atualizarPostagem = (evento) => {
     const [campo, valor] = [evento.target.name, evento.target.value];
@@ -59,23 +49,48 @@ function CriacaoPage() {
   const postar = (evento) => {
     evento.preventDefault();
     if (verificarUsuario()) {
-      const upPost = validarPost({
+      const notificarId = toast.loading("Criando postagem...");
+
+      validarPost({
         ...postagem,
         token: usuario.token,
         criador: usuario.username,
+      }).then((res) => {
+        switch (res) {
+          case 'badRequest':
+            toast.update(notificarId, {type: 'warning', render: 'Preencha tods os campos para postar.', isLoading: false, autoClose: 3000})
+            return console.error('Preencha os campos todos os campos.');
+
+          case "accessoNãoAutorizado":
+            toast.update(notificarId, {
+              type: "warning",
+              render: "Você não possui autorização para postar.",
+              isLoading: false,
+              autoClose: 5000,
+            });
+            console.error("Você não possui autorização para postar.");
+            return direcionar("/login");
+
+          case "serverError":
+            toast.update(notificarId, {
+              type: "error",
+              render: "Servidor inativo para esta ação.",
+              isLoading: false,
+              autoClose: 5000,
+            });
+            return console.error("Servidor inativo para esta ação.");
+
+          default:
+            console.log("Post criado com sucesso!");
+            toast.update(notificarId, {
+              type: "success",
+              render: "Postagem criada com sucesso!",
+              isLoading: false,
+              autoClose: 3000,
+            });
+            return direcionar("/postagens");
+        }
       });
-
-      switch (upPost) {
-        case "accessoNãoAutorizado":
-          return console.error("Você não possui autorização para postar.");
-
-        case "serverError":
-          return console.error("Servidor inativo para esta ação.");
-
-        default:
-          console.log("Post criado com sucesso!");
-          return direcionar("/postagens");
-      }
     } else {
       return direcionar("/login");
     }
@@ -84,7 +99,7 @@ function CriacaoPage() {
   useEffect(resizeTextArea, [postagem.conteudo]);
 
   return (
-    <form onSubmit={(evento) => postar(evento)} id="criacaoPage">
+    <form onSubmit={(evento) => postar(evento)} id="criarPostPage">
       <section id="cabecalho">
         <h4>Criar postagem</h4>
 
@@ -155,4 +170,4 @@ function CriacaoPage() {
   );
 }
 
-export default CriacaoPage;
+export default CriarPostPage;

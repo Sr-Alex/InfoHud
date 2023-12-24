@@ -1,22 +1,22 @@
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { validarCadastro } from "../../../services/validadores";
+import { toast } from "react-toastify";
 
 import "../Formulario.css";
 import usuarioContext from "../../../context/usuarioCont";
-import { useNavigate } from "react-router-dom";
+import { loginAutomatico, salvarUsuario } from "../../../services/storage";
 
-function infosIniciais() {
-  return {
-    nome: "",
-    nickname: "",
-    email: "",
-    senha: "",
-  };
-}
+const infosIniciais = {
+  nome: "",
+  nickname: "",
+  email: "",
+  senha: "",
+};
 
 function FormularioCadastro() {
   const [cadastroInfos, setCadastroInfos] = useState(infosIniciais);
-  const { usuario } = useContext(usuarioContext);
+  const { setUsuario } = useContext(usuarioContext);
   const direcionar = useNavigate();
 
   const atualizarInfos = (evento) => {
@@ -29,10 +29,44 @@ function FormularioCadastro() {
 
   const cadastroHandler = async (evento) => {
     evento.preventDefault();
-    if(usuario.token && usuario.username){
-      return direcionar('/postagens');
-    }
-    return validarCadastro(cadastroInfos);
+
+    const notificarId = toast.loading("Criando perfil de usuário... ");
+
+    validarCadastro(cadastroInfos)
+      .then((res) => {
+        switch (res) {
+          case "serverError":
+            toast.update(notificarId, {
+              type: "error",
+              render: "Servidor inativo para esta ação!",
+              isLoading: false,
+              autoClose: 5000,
+            });
+            console.error("Servidor inativo para a ação de cadastro.");
+            break;
+
+          default:
+            toast.update(notificarId, {
+              type: "success",
+              render: "Usuário criado e logado com sucesso. Aproveite!",
+              isLoading: false,
+              autoClose: 5000,
+            });
+
+            salvarUsuario(res);
+            loginAutomatico(setUsuario);
+            return direcionar("/postagens");
+        }
+      })
+      .catch((erro) => {
+        toast.update(notificarId, {
+          type: "error",
+          render: "Algo deu errado com a requisição.",
+          isLoading: false,
+          autoClose: 5000,
+        });
+        console.error(`Algo deu errado com a requisição: ${erro}`);
+      });
   };
 
   return (

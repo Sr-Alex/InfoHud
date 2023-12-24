@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import usuarioContext from "./context/usuarioCont";
 import { loginAutomatico } from "./services/storage";
 
@@ -13,21 +13,32 @@ function App() {
     username: "",
     token: "",
   });
-  const [ montado, setMontado ] = useState(false);
+
+  const [montado, setMontado] = useState(false);
+  
+  const autoLoginNotificacao = () =>
+    toast("Login automático efetuado. Aproveite!", {
+      type: "success",
+      autoClose: 3000,
+    });
 
   useEffect(() => {
-    if(!montado) {
+    if (!montado) {
       setMontado(true);
     } else {
-      loginAutomatico(setUsuario);
+      const userStorage = localStorage.getItem("usuarioStorage");
+      if (userStorage && Object.values(userStorage).every((campo) => campo)) {
+        loginAutomatico(setUsuario);
+        autoLoginNotificacao();
+      }
     }
-  }, [montado])
+  }, [montado]);
 
   return (
     <usuarioContext.Provider value={{ usuario, setUsuario }}>
       <MenuSuperior />
       <Outlet />
-      <ToastContainer position="bottom-right" draggable={true} draggableDirection="y"/>
+      <ToastContainer position="bottom-right" />
     </usuarioContext.Provider>
   );
 }

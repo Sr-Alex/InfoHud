@@ -18,5 +18,7 @@
 
     #showPostagens {
         padding: 1rem;
+
+        overflow: hidden auto;
     }
 }
