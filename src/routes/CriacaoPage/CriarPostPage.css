@@ -16,6 +16,24 @@
     margin: 0;
 }
 
+#cabecalho #selectCategoria {
+    display: flex; flex-wrap: wrap;
+    width: 100%; margin: 1rem 0;
+}
+
+#cabecalho #selectCategoria div {
+    margin: 0 .5rem;
+
+}
+
+#cabecalho #selectCategoria div label {
+    color: var(--IH-gray);
+}
+
+#cabecalho #selectCategoria div input[type="radio"] {
+    width: 1rem; margin: 0 .5rem;
+}
+
 #cabecalho label {
     font-size: 1em;
     font-weight: bolder;
@@ -23,8 +41,7 @@
 
 #cabecalho input {
     max-width: 16rem; width: 70%;
-    height: 2rem;
-    margin: 1rem 0;
+    height: 2rem; margin: 1rem 0;
 
     background-color: var(--IH-white);
 }
@@ -57,7 +74,7 @@
 }
 
 #conteudo {
-    width: 100%;
+    width: 100%; height: 100%;
     padding: 1rem;
 
     color: var(--IH-white);
@@ -128,7 +145,7 @@
     #cabecalho {
         justify-content: space-between;
         min-width: 25rem; width: 35%;
-        max-height: 30rem; height: 80%;
+        height: 80%;
     }
 
     #conteudo {

@@ -57,6 +57,7 @@ export function validarPost(post) {
     titulo: "",
     subtitulo: "",
     miniatura: "",
+    categoria: "",
     conteudo: "",
     token: "",
     criador: "",
@@ -77,6 +78,7 @@ export function validarPost(post) {
     postagem: {
       titulo: post.titulo,
       subtitulo: post.subtitulo,
+      categoria: post.categoria,
       miniurl: post.miniatura,
       conteudo: post.conteudo,
       user_nickname: post.criador,

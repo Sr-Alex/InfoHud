@@ -7,19 +7,18 @@ import imagePlaceholder from "../../assets/imagePlaceholder.png";
 import { validarPost } from "../../services/validadores";
 import { toast } from "react-toastify";
 
-function valoresIniciais() {
-  return {
-    titulo: "",
-    subtitulo: "",
-    miniatura: "",
-    conteudo: "",
-    criador: "",
-  };
-}
+const valoresIniciais = {
+  titulo: "",
+  subtitulo: "",
+  miniatura: "",
+  categoria: "",
+  conteudo: "",
+  criador: "",
+};
 
 function CriarPostPage() {
   const { usuario } = useContext(usuarioContext);
-  const [postagem, setPostagem] = useState(valoresIniciais());
+  const [postagem, setPostagem] = useState(valoresIniciais);
   const direcionar = useNavigate();
   const textAreaRef = useRef("");
 
@@ -57,15 +56,22 @@ function CriarPostPage() {
         criador: usuario.username,
       }).then((res) => {
         switch (res) {
-          case 'badRequest':
-            toast.update(notificarId, {type: 'warning', render: 'Preencha tods os campos para postar.', isLoading: false, autoClose: 3000})
-            return console.error('Preencha os campos todos os campos.');
+          case "badRequest":
+            toast.update(notificarId, {
+              type: "warning",
+              render: "Preencha tods os campos para postar.",
+              isLoading: false,
+              closeOnClick: true,
+              autoClose: 3000,
+            });
+            return console.error("Preencha os campos todos os campos.");
 
           case "accessoNãoAutorizado":
             toast.update(notificarId, {
               type: "warning",
               render: "Você não possui autorização para postar.",
               isLoading: false,
+              closeOnClick: true,
               autoClose: 5000,
             });
             console.error("Você não possui autorização para postar.");
@@ -86,6 +92,7 @@ function CriarPostPage() {
               type: "success",
               render: "Postagem criada com sucesso!",
               isLoading: false,
+              closeOnClick: true,
               autoClose: 3000,
             });
             return direcionar("/postagens");
@@ -102,6 +109,54 @@ function CriarPostPage() {
     <form onSubmit={(evento) => postar(evento)} id="criarPostPage">
       <section id="cabecalho">
         <h4>Criar postagem</h4>
+
+        <label htmlFor="selectCategoria">Categoria da postagem:</label>
+        <div id="selectCategoria">
+          <div>
+            <input
+              type="radio"
+              name="categoria"
+              className="radioCategoria"
+              id="radioRedes"
+              value="Redes"
+              onChange={evento => atualizarPostagem(evento)}
+            />
+            <label htmlFor="radioRedes">Redes</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="categoria"
+              className="radioCategoria"
+              id="radioWeb"
+              value="Web"
+              onChange={evento => atualizarPostagem(evento)}
+            />
+            <label htmlFor="radioWeb">Web</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="categoria"
+              className="radioCategoria"
+              id="radioMobile"
+              value="Mobile"
+              onChange={evento => atualizarPostagem(evento)}
+            />
+            <label htmlFor="radioMobile">Mobile</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="categoria"
+              className="radioCategoria"
+              id="radioML"
+              value="Machine Learning"
+              onChange={evento => atualizarPostagem(evento)}
+            />
+            <label htmlFor="radioML">Machine Learning</label>
+          </div>
+        </div>
 
         <label htmlFor="tituloInput">Titulo:</label>
         <input

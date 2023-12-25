@@ -3,7 +3,7 @@ import { useState } from "react";
 import FormularioLogin from "../../components/Formularios/FormularioLogin/FormularioLogin";
 import FormularioCadastro from "../../components/Formularios/FormularioCadastro/FormularioCadastro";
 
-import "./LoginPage.css";
+import "../LoginPage/LoginPage.css";
 
 function LoginPage() {
   const [mostrarLogin, setMostrarLogin] = useState(true);

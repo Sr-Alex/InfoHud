@@ -1,14 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from './App.jsx';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import InicioPage from './routes/InicioPage/InicioPage';
 import LoginPage from './routes/LoginPage/LoginPage';
 import PostagensPage from './routes/PostagensPage/PostagensPage';
 import CriarPostPage from './routes/CriacaoPage/CriarPostPage';
+
+import './index.css';
 
 const router= createBrowserRouter([
   {
