@@ -3,10 +3,10 @@ import ReactDOM from "react-dom/client";
 import App from './App.jsx';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import InicioPage from './routes/InicioPage/InicioPage';
-import LoginPage from './routes/LoginPage/LoginPage';
-import PostagensPage from './routes/PostagensPage/PostagensPage';
-import CriarPostPage from './routes/CriacaoPage/CriarPostPage';
+import InicioPage from './routes/InicioPage/InicioPage.jsx';
+import LoginPage from './routes/LoginPage/LoginPage.jsx';
+import PostagensPage from './routes/PostagensPage/PostagensPage.jsx';
+import CriarPostPage from './routes/CriacaoPage/CriarPostPage.jsx';
 
 import './index.css';
 
