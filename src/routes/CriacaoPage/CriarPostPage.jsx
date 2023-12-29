@@ -108,7 +108,7 @@ function CriarPostPage() {
   return (
     <form onSubmit={(evento) => postar(evento)} id="criarPostPage">
       <section id="cabecalho">
-        <h4>Criar postagem</h4>
+        <h4>Criar postagem:</h4>
 
         <label htmlFor="selectCategoria">Categoria da postagem:</label>
         <div id="selectCategoria">

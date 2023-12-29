@@ -51,11 +51,13 @@
 .login #square {
     right: 0;
     border-left: 15rem solid transparent;
+    border-right: none;
 }
 
 .cadastro #square {
     left: 0;
     border-right: 15rem solid transparent;
+    border-left: none;
 }
 
 

@@ -1,0 +1,62 @@
+#usuarioPerfil {
+    display: flex; flex-direction: column;
+    width: 100%; height: calc(100vh - 3rem);
+}
+
+#perfilInfos {
+    display: flex; flex-direction: column;
+    width: 100%; gap: 1rem;
+    padding: .5rem 1rem;
+
+    background-color: var(--IH-white);
+}
+
+#perfilInfos > h4, #perfilPosts > h4 {
+    margin: 0 0 1rem 1rem;
+
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    color: var(--IH-blue);
+}
+
+#perfilInfos #perfilBiografia {
+    width: 16rem; height: 6rem;
+    padding: .5rem;
+
+    background-color: white;
+    border-radius: 1rem;
+}
+
+#perfilPosts {
+    width: 100%; padding: .5rem 0;
+
+    background-color: white;
+}
+
+#perfilPosts ul {
+    width: 100%;
+}
+
+
+@media (min-width: 1024px) {
+    #usuarioPerfil {
+        flex-direction: row;
+    }
+
+    #perfilInfos {
+        width: 24rem;
+    }
+    
+    #perfilPosts {
+        display: flex; flex-direction: column;
+        height: 100%;
+    }
+    
+    #perfilPosts ul {
+        width: 100%; height: 100%;
+        padding: .5rem 1rem;
+
+        overflow-y: auto;
+    }
+}

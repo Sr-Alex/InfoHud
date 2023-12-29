@@ -1,4 +1,5 @@
-import { efetuarCadastro, fazerLogin, publicarPost } from "./api";
+import { efetuarCadastro, fazerLogin } from './api/auth.js';
+import { publicarPost } from './api/postagem.js';
 
 const emailRegex = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
 
@@ -27,6 +28,7 @@ export function validarCadastro(infos) {
     first_name: infos.nome,
     email: infos.email,
     password: infos.senha,
+    last_name: ""
   });
 }
 
@@ -72,7 +74,6 @@ export function validarPost(post) {
       return console.error("Campos inválidos!");
     }
   }
-  console.log(post);
   return publicarPost({
     token: post.token,
     postagem: {

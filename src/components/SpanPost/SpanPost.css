@@ -9,7 +9,6 @@
 
 .spanPost figure { 
     width: 6rem; height: 6rem;
-
     border-radius: 1rem;
 }
 
@@ -23,9 +22,13 @@
     display: flex; flex-direction: column;
     justify-content: space-between;
 
-    min-width: 12rem; width: min-content;
+    min-width: 12rem; width: 60%;
     height: 100%;
 
+    text-align: end;
+}
+
+#conteudoPost div {
     text-align: end;
 }
 
@@ -45,6 +48,7 @@
 
     white-space: nowrap;
     overflow: hidden;
+    
 }
 
 #conteudoPost #metaInformacoes {

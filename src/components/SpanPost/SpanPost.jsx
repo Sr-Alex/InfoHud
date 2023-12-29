@@ -1,5 +1,6 @@
 import "./SpanPost.css";
 import imagePlaceholder from "../../assets/imagePlaceholder.png";
+import { Link } from "react-router-dom";
 
 function SpanPost({
   titulo,
@@ -29,9 +30,9 @@ function SpanPost({
           <p>{conteudo}</p>
         </div>
         <span id="metaInformacoes">
-          <p>
+          <Link to={`/usuario/${criador}`}>
             {categoria} - {criador}
-          </p>
+          </Link>
         </span>
       </section>
     </li>

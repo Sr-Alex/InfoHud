@@ -7,6 +7,7 @@ import InicioPage from './routes/InicioPage/InicioPage.jsx';
 import LoginPage from './routes/LoginPage/LoginPage.jsx';
 import PostagensPage from './routes/PostagensPage/PostagensPage.jsx';
 import CriarPostPage from './routes/CriacaoPage/CriarPostPage.jsx';
+import UsuarioPage from './routes/UsuarioPage/UsuarioPage.jsx';
 
 import './index.css';
 
@@ -31,6 +32,10 @@ const router= createBrowserRouter([
         path: 'postagens/criar',
         element: <CriarPostPage/>
       },
+      {
+        path: '/usuario/:username',
+        element: <UsuarioPage/>
+      }
     ],
   }
 ]);

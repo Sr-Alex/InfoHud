@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { buscarPosts } from "../../services/api";
+import { buscarPosts } from "../../services/api/postagem.js";
 
 import MenuLateral from "../../components/MenuLateral/MenuLateral";
 import SpanPost from "../../components/SpanPost/SpanPost";
