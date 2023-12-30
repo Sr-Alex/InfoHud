@@ -25,6 +25,7 @@ function MenuLateral({ carregarPosts }) {
       autoClose: 3000,
       closeOnClick: true,
     });
+    console.table(usuario);
   };
 
   const atualizarFiltro = (evento) => {

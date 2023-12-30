@@ -3,7 +3,6 @@ import { apiURL, loginConfig, cadastroConfig } from './config.js';
 export async function fazerLogin(infos) {
     return await fetch(`${apiURL}/login/`, loginConfig(infos))
       .then((res) => {
-        console.log(res.status);
         switch (res.status) {
           case 200:
             return res.json();
