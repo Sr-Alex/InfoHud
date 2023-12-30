@@ -27,8 +27,8 @@ export async function publicarPost(dados) {
       .catch((error) => console.error("Ocorreu um erro: ", error));
   }
   
-  export async function buscarPosts(usuario = undefined) {
-    return await fetch(`${apiURL}/postagem/${usuario ? '?criador='+ usuario : ''}`)
+  export async function buscarPosts(usuario = undefined, categoria = undefined) {
+    return await fetch(`${apiURL}/postagem/?criador=${usuario ? usuario : ''}&categoria=${categoria ? categoria : ''}`)
       .then((res) => {
         switch (res.status) {
           case 200:

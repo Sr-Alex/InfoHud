@@ -11,8 +11,8 @@ import imagePlaceholder from "../../assets/imagePlaceholder.png";
 function PostagensPage() {
   const [postagensList, setPostagensList] = useState([]);
 
-  const carregarPosts = async () => {
-    const posts = await buscarPosts();
+  const carregarPosts = async (criador=undefined, categoria=undefined) => {
+    const posts = await buscarPosts(criador, categoria);
     switch (posts) {
       case "serverError":
         console.error("Servidor inativo para esta ação.");
@@ -34,9 +34,7 @@ function PostagensPage() {
   return (
     <section id="postagemPage">
       <MenuLateral
-        state={postagensList}
-        setState={setPostagensList}
-        resetPosts={carregarPosts}
+        carregarPosts={carregarPosts}
       />
       <ul id="showPostagens">
         {postagensList.length ? (
