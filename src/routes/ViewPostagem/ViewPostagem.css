@@ -31,3 +31,7 @@
 
     background-color: var(--IH-white);
 }
+
+@media (min-width: 1024px) {
+    #postagem
+}

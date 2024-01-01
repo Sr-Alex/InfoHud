@@ -41,10 +41,11 @@ function PostagensPage() {
           postagensList.map((post) => (
             <SpanPost
               key={post.id}
+              id={post.id}
               titulo={post.titulo}
               subtitulo={post.subtitulo}
               conteudo={post.conteudo}
-              miniatura={post.miniurl ? post.miniurl : imagePlaceholder}
+              miniatura={post.miniurl}
               categoria={post.categoria}
               criador={post.user_nickname}
             />

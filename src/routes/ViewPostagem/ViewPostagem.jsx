@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { buscarPosts } from "../../services/api/postagem";
 import { toast } from "react-toastify";
 
@@ -56,6 +56,10 @@ function ViewPostagem() {
     }
   };
 
+  const handleMiniaturaError = (evento) => {
+    evento.target.src = imagePlaceholder;
+  }
+
   useEffect(() => {
     buscarPostagem(id);
   }, []);
@@ -64,10 +68,11 @@ function ViewPostagem() {
     <section id="postagem">
       <h4>{conteudo.titulo}</h4>
       <h5>{conteudo.subtitulo}</h5>
+      <Link to={`/usuario/${conteudo.criador}`}>{conteudo.criador}</Link>
       <figure id="postImagem">
         <img
           src={conteudo.miniatura}
-          onError={(evento) => (evento.target.src = imagePlaceholder)}
+          onError={(evento) => handleMiniaturaError(evento)}
           alt="Imagem da postagem."
         />
       </figure>

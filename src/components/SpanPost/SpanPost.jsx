@@ -1,8 +1,11 @@
-import "./SpanPost.css";
+import { Link, useNavigate } from "react-router-dom";
+
 import imagePlaceholder from "../../assets/imagePlaceholder.png";
-import { Link } from "react-router-dom";
+
+import "./SpanPost.css";
 
 function SpanPost({
+  id,
   titulo,
   subtitulo,
   conteudo,
@@ -11,12 +14,18 @@ function SpanPost({
   criador,
 }) {
 
+  const direcionar = useNavigate();
+
   const handleMiniaturaError = (evento) => {
     evento.target.src = imagePlaceholder;
   };
 
+  const handleAbrirPost = (evento) => {
+    direcionar(`/postagens/postagem/${id}`);
+  }
+
   return (
-    <li className="spanPost">
+    <li className="spanPost" onClick={evento => handleAbrirPost(evento)}>
       <figure>
         <img
           src={miniatura}

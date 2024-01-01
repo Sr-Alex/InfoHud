@@ -58,10 +58,15 @@
 }
 
 .spanPost:hover {
-    transform: scale(1.01);
+    transform: scale(1.02);
     box-shadow: 0 .5rem 1rem var(--IH-blue);
-
+    
     cursor: pointer;
+}
+
+.spanPost:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 1rem var(--IH-blue);
 }
 
 @media (min-width: 1024px) {
