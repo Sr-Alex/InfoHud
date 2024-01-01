@@ -10,6 +10,7 @@ function SpanPost({
   categoria,
   criador,
 }) {
+
   const handleMiniaturaError = (evento) => {
     evento.target.src = imagePlaceholder;
   };

@@ -8,6 +8,7 @@ import LoginPage from './routes/LoginPage/LoginPage.jsx';
 import PostagensPage from './routes/PostagensPage/PostagensPage.jsx';
 import CriarPostPage from './routes/CriacaoPage/CriarPostPage.jsx';
 import UsuarioPage from './routes/UsuarioPage/UsuarioPage.jsx';
+import ViewPostagem from "./routes/ViewPostagem/ViewPostagem.jsx";
 
 import './index.css';
 
@@ -27,6 +28,10 @@ const router= createBrowserRouter([
       {
         path: 'postagens',
         element: <PostagensPage/>
+      },
+      {
+        path: 'postagens/postagem/:id',
+        element: <ViewPostagem/>
       },
       {
         path: 'postagens/criar',
