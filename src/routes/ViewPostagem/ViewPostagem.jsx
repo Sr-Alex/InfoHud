@@ -45,20 +45,20 @@ function ViewPostagem() {
 
       default:
         setConteudo({
-          titulo: post.titulo,
-          subtitulo: post.subtitulo,
-          conteudo: post.conteudo.split("\n"),
-          miniatura: post.miniurl,
-          categoria: post.categoria,
-          criador: user_nickname,
+          titulo: post[0].titulo,
+          subtitulo: post[0].subtitulo,
+          conteudo: post[0].conteudo.split("\n"),
+          miniatura: post[0].miniurl,
+          categoria: post[0].categoria,
+          criador: post[0].user_nickname,
         });
-        break;
+        break;  
     }
   };
 
   const handleMiniaturaError = (evento) => {
     evento.target.src = imagePlaceholder;
-  }
+  };
 
   useEffect(() => {
     buscarPostagem(id);
@@ -66,18 +66,24 @@ function ViewPostagem() {
 
   return (
     <section id="postagem">
-      <h4>{conteudo.titulo}</h4>
-      <h5>{conteudo.subtitulo}</h5>
-      <Link to={`/usuario/${conteudo.criador}`}>{conteudo.criador}</Link>
-      <figure id="postImagem">
-        <img
-          src={conteudo.miniatura}
-          onError={(evento) => handleMiniaturaError(evento)}
-          alt="Imagem da postagem."
-        />
-      </figure>
+      <section id="postInformacoes">
+        <h4>{conteudo.titulo}</h4>
+        <h5>{conteudo.subtitulo}</h5>
+        <div id="criadorInfos">
+        <span>{conteudo.categoria}</span>
+        <span>-</span>
+        <Link to={`/usuario/${conteudo.criador}`}>{conteudo.criador}</Link>
+        </div>
+        <figure id="postImagem">
+          <img
+            src={conteudo.miniatura}
+            onError={(evento) => handleMiniaturaError(evento)}
+            alt="Imagem da postagem."
+          />
+        </figure>
+      </section>
       <section id="postConteudo">
-        {conteudo.length &&
+        {conteudo.conteudo.length &&
           conteudo.conteudo.map((paragrafo, index) => (
             <p key={index}>{paragrafo}</p>
           ))}

@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import usuarioContext from "../../context/usuarioCont";
 
 import { FaSearch } from "react-icons/fa";
 import Logo from "../../components/Logo/Logo";
@@ -6,6 +8,8 @@ import Logo from "../../components/Logo/Logo";
 import "./MenuSuperior.css";
 
 function MenuSuperior() {
+  const { usuario } = useContext(usuarioContext);
+
   return (
     <header id="menuSuperior">
       <Logo />
@@ -18,8 +22,8 @@ function MenuSuperior() {
           Postagens
         </Link>
 
-        <Link to={"contato"} className="">
-          Contato
+        <Link to={usuario.username ? '/usuario/' + usuario.username : '/login'} className="">
+          Perfil
         </Link>
       </nav>
       <div id="pesquisar">

@@ -64,7 +64,7 @@
 @media (min-width: 1024px) {
     .loginPage {
         justify-content: space-evenly; align-items: center;
-        height: calc(100vh - 3rem);
+        height: calc(100vh - var(--IH-headerHeight));
     }
     
     .login {

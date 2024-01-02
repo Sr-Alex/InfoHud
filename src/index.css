@@ -4,6 +4,8 @@
 }
 
 :root {
+    --IH-headerHeight: 3rem;
+
     --IH-blue: #1E7387;
     --IH-white: #dfe6ed;
     --IH-gray: #575757;

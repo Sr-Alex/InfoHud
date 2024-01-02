@@ -77,12 +77,18 @@ export function validarPost(post) {
   return publicarPost({
     token: post.token,
     postagem: {
-      titulo: post.titulo,
-      subtitulo: post.subtitulo,
-      categoria: post.categoria,
-      miniurl: post.miniatura,
-      conteudo: post.conteudo,
-      user_nickname: post.criador,
+      "titulo": post.titulo,
+      "subtitulo": post.subtitulo,
+      "categoria": post.categoria,
+      "miniurl": post.miniatura,
+      "conteudo": post.conteudo,
+      "user_nickname": post.criador,
+      // "titulo": "Teste enviado pelo Thunder",
+      //   "subtitulo": "subtitulo",
+      //   "categoria": "categoria",
+      //   "miniurl": "12313o4j2o5j3b",
+      //   "conteudo": "conteudo",
+      //   "user_nickname": "AlexN64"
     },
   });
 }

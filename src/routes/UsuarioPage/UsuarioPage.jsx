@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { fetchUsuario } from "../../services/api/usuario";
 import { buscarPosts } from "../../services/api/postagem";
+import { toast } from "react-toastify";
 
 import SpanPost from "../../components/SpanPost/SpanPost";
+import IconErro from "../../components/IconErro/IconErro";
 
 import "./UsuarioPage.css";
 
@@ -20,13 +22,43 @@ const infosIniciais = {
 function UsuarioPage() {
   const [usuarioInfos, setUsuarioInfos] = useState(infosIniciais);
   const { username } = useParams();
+  const [perfilEditavel, setPerfilEditavel] = useState(false);
+  const [montado, setMontado] = useState(false);
+
+  const direcionar = useNavigate();
 
   const carregarUsuario = async () => {
-    console.log("request");
-    setUsuarioInfos({
-      infos: await fetchUsuario(username),
-      postagens: await buscarPosts(username),
-    });
+    const usuario = await fetchUsuario(username);
+    const postagens = await buscarPosts(username);
+
+    switch (usuario) {
+      case undefined:
+        toast("Usuário Inexistente.", {
+          type: "error",
+          autoClose: 3000,
+          closeOnClick: true,
+          closeButton: true,
+        });
+        direcionar("/postagens");
+        break;
+
+      case "serverError":
+        toast("Servidor inativo para esta ação.", {
+          type: "error",
+          autoClose: 5000,
+          closeOnClick: true,
+        });
+        direcionar("/postagens");
+        break;
+
+      default:
+        setUsuarioInfos({
+          ...usuarioInfos,
+          infos: usuario,
+          postagens: Array.isArray(postagens) ? postagens : [],
+        });
+        break;
+    }
   };
 
   useEffect(() => {
@@ -47,7 +79,7 @@ function UsuarioPage() {
       <section id="perfilPosts">
         <h4>Suas Postagens:</h4>
         <ul>
-          {usuarioInfos.postagens.length &&
+          {usuarioInfos.postagens.length ? (
             usuarioInfos.postagens.map((post) => (
               <SpanPost
                 key={post.id}
@@ -58,7 +90,10 @@ function UsuarioPage() {
                 categoria={post.categoria}
                 criador={post.user_nickname}
               />
-            ))}{" "}
+            ))
+          ) : (
+            <IconErro mensagem="Este usuário ainda não criou nenhuma postagem." />
+          )}
         </ul>
       </section>
     </section>

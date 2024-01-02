@@ -1,6 +1,6 @@
 #inicioPage {
     display: flex; flex-direction: column;
-    width: 100%; height: calc(100vh - 3rem);
+    width: 100%; height: calc(100vh - var(--IH-headerHeight));
 }
 
 #bemVindo {
@@ -95,7 +95,7 @@
     }
 
     #imgBG {
-        width: 65%; height: calc(100vh - 3rem);
+        width: 65%; height: calc(100vh - var(--IH-headerHeight));
     }
 
     #imgBG img {

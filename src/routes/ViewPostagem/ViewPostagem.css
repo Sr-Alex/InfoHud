@@ -3,7 +3,11 @@
     width: 100%;
 }
 
-#postagem > h4, #postagem > h5 {
+#postInformacoes {
+    width: 100%; height: auto;
+}
+
+#postInformacoes > h4, #postInformacoes > h5 {
     display: block;
     width: 50%;
     margin: 1rem .5rem; padding: 0 0 .5rem 0;
@@ -14,13 +18,23 @@
     border-bottom: 2px solid var(--IH-blue);
 }
 
-#postagem > h4 {
+#postInformacoes > h4 {
     width: 70%;
     font-size: 1.2rem;
 } 
 
+#criadorInfos > * {
+    display: inline-block;
+    margin: 0 1rem 0 .5rem;
+
+    font-size: 1rem;
+    font-weight: bold;
+}
+
 #postImagem {
-    width: 100%; height: 20rem;
+    max-width: 90%; width: auto;
+    height: auto;
+    margin: 1rem auto;
 }
 
 #postConteudo {
@@ -32,6 +46,27 @@
     background-color: var(--IH-white);
 }
 
+#postConteudo > p {
+    margin: 1rem 0;
+    text-align: justify;
+    line-height: 1.5rem;
+}
+
 @media (min-width: 1024px) {
-    #postagem
+    #postagem{
+        flex-direction: row; justify-content: space-between;
+        height: calc(100vh - var(--IH-headerHeight));
+        padding: .5rem 1rem;
+    }
+
+    #postInformacoes {
+        width: 40%; height: 100%;
+    }
+    #postConteudo {
+        width: 50%; height: 100%;
+
+        overflow-y: auto;
+
+        border-radius: 1rem;
+    }
 }

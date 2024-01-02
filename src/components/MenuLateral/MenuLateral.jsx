@@ -25,7 +25,6 @@ function MenuLateral({ carregarPosts }) {
       autoClose: 3000,
       closeOnClick: true,
     });
-    console.table(usuario);
   };
 
   const atualizarFiltro = (evento) => {
@@ -37,7 +36,6 @@ function MenuLateral({ carregarPosts }) {
   };
 
   const handleBotaoBuscar = () => {
-    console.log(filtro);
     setFiltro({
       ...filtro,
       criador: inputPesquisar.current.value

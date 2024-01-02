@@ -6,7 +6,6 @@ import SpanPost from "../../components/SpanPost/SpanPost";
 import IconErro from "../../components/IconErro/IconErro";
 
 import "./PostagensPage.css";
-import imagePlaceholder from "../../assets/imagePlaceholder.png";
 
 function PostagensPage() {
   const [postagensList, setPostagensList] = useState([]);

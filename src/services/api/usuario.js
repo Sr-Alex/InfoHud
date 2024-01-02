@@ -19,5 +19,5 @@ export async function fetchUsuario(username) {
           );
       }
     })
-    .then((data) => (data[0] ? data[0] : data));
+    .then((data) => (Array.isArray(data) ? data[0] : data));
 }
