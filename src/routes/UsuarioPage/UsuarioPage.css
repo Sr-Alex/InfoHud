@@ -3,7 +3,13 @@
     width: 100%; height: calc(100vh - var(--IH-headerHeight));
 }
 
-#perfilInfos {
+#botaoEditar {
+    display: block;
+    width: 1.5rem; aspect-ratio: 1/1;
+    margin: 0 0 0 auto;
+}
+
+#perfilContainer {
     width: 100%;
     padding: .5rem 1rem;
 
@@ -11,7 +17,7 @@
 }
 
 #perfilInfos > h4, #perfilPosts > h4 {
-    margin: 0 0 1rem 1rem;
+    margin: 0 0 1rem .5rem;
 
     font-size: 1.2rem;
     font-weight: bold;
@@ -23,12 +29,18 @@
     margin: 1rem 0;
 }
 
-#perfilInfos #perfilBiografia {
-    width: 16rem; height: 6rem;
+#perfilBiografia {
+    width: 16rem;
+    max-height: 16rem; height: auto;
     margin: 1rem 0; padding: .5rem;
 
     background-color: white;
     border-radius: 1rem;
+}
+
+#perfilBiografia p {
+    width: 100%;
+    word-break: break-all;
 }
 
 #perfilPosts {
@@ -43,13 +55,54 @@
     width: 100%;
 }
 
+#updateUsuario {
+    width: 100%;
+}
+
+#updateUsuario div * {
+    display: block;
+    max-width: 80%; width: 16rem;
+    margin: 0 0 .5rem 0;
+
+    font-size: 1rem;
+}
+
+#updateUsuario div input {
+    height: 2rem;
+}
+
+#updateUsuario div textarea {
+    max-width: 60%; width: 16rem;
+    padding: .5rem;
+
+    font-size: 1rem;
+
+    border: none;
+    border-radius: 1rem;
+}
+
+#botaoAtualizarUsuario {
+    width: 6rem; height: 1.5rem;
+
+    font-size: 1rem;
+
+    color: var(--IH-white);
+    background-color: var(--IH-blue);
+
+    border-radius: 1rem;
+}
+
 @media (min-width: 1024px) {
     #usuarioPerfil {
         flex-direction: row;
     }
 
-    #perfilInfos {
+    #perfilContainer {
         max-width: 20rem; width: 40%;
+    }
+
+    #updateUsuario div textarea {
+        max-width: none; width: 90%;
     }
     
     #perfilPosts {
