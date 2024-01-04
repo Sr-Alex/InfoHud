@@ -21,7 +21,7 @@ function SpanPost({
   };
 
   const handleAbrirPost = (evento) => {
-    direcionar(`/postagens/postagem/${id}`);
+    direcionar(`/postagens/${id}`);
   }
 
   return (

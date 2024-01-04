@@ -10,8 +10,11 @@ import "./PostagensPage.css";
 function PostagensPage() {
   const [postagensList, setPostagensList] = useState([]);
 
-  const carregarPosts = async (criador=undefined, categoria=undefined) => {
-    const posts = await buscarPosts(criador, categoria);
+  const carregarPosts = async ({
+    criador = undefined,
+    categoria = undefined,
+  } = {}) => {
+    const posts = await buscarPosts({usuario: criador, categoria: categoria});
     switch (posts) {
       case "serverError":
         console.error("Servidor inativo para esta ação.");
@@ -32,9 +35,7 @@ function PostagensPage() {
 
   return (
     <section id="postagemPage">
-      <MenuLateral
-        carregarPosts={carregarPosts}
-      />
+      <MenuLateral carregarPosts={carregarPosts} />
       <ul id="showPostagens">
         {postagensList.length ? (
           postagensList.map((post) => (

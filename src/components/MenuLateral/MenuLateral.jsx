@@ -40,7 +40,7 @@ function MenuLateral({ carregarPosts }) {
       ...filtro,
       criador: inputPesquisar.current.value
     });
-    carregarPosts(filtro.criador, filtro.categoria)
+    carregarPosts({craidor: filtro.criador, categoria: filtro.categoria})
   };
 
   return (

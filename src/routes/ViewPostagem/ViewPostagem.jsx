@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { buscarPosts } from "../../services/api/postagem";
+import { buscarPosts, excluirPost } from "../../services/api/postagem";
 import { toast } from "react-toastify";
+import usuarioContext from "../../context/usuarioCont";
 
 import imagePlaceholder from "../../assets/imagePlaceholder.png";
+import iconExcluir from "../../assets/iconExcluir.svg";
 
 import "./ViewPostagem.css";
 
 const conteudoInicial = {
+  id: undefined,
   titulo: "",
   subtitulo: "",
   conteudo: [],
@@ -17,14 +20,21 @@ const conteudoInicial = {
 };
 
 function ViewPostagem() {
+  const { usuario } = useContext(usuarioContext);
   const [conteudo, setConteudo] = useState(conteudoInicial);
+  const [postagemEditavel, setPostagemEdital] = useState(false);
   const { id } = useParams();
 
   const direcionar = useNavigate();
 
+  const verificarPostagemEditavel = (criador) => {
+    setPostagemEdital(usuario.username === criador);
+  };
+
   const buscarPostagem = async (id) => {
-    const post = await buscarPosts({ id: id });
-    switch (post) {
+    const response = await buscarPosts({ id: id });
+
+    switch (response) {
       case undefined:
         toast("Postagem não encontrada!", {
           type: "error",
@@ -45,14 +55,72 @@ function ViewPostagem() {
 
       default:
         setConteudo({
-          titulo: post[0].titulo,
-          subtitulo: post[0].subtitulo,
-          conteudo: post[0].conteudo.split("\n"),
-          miniatura: post[0].miniurl,
-          categoria: post[0].categoria,
-          criador: post[0].user_nickname,
+          id: response[0].id,
+          titulo: response[0].titulo,
+          subtitulo: response[0].subtitulo,
+          conteudo: response[0].conteudo.split("\n"),
+          miniatura: response[0].miniurl,
+          categoria: response[0].categoria,
+          criador: response[0].user_nickname,
         });
-        break;  
+
+        verificarPostagemEditavel(response[0].user_nickname);
+        break;
+    }
+  };
+
+  const handleExclusao = async () => {
+    const response = await excluirPost(conteudo.id);
+
+    const idNotificar = toast.loading("Realizando exclusão de postagem...");
+
+    switch (response) {
+      case "accessoNãoAutorizado":
+        toast.update(idNotificar, {
+          type: "warning",
+          isLoading: false,
+          autoClose: 3000,
+          closeOnClick: true,
+          closeButton: true,
+          render: "Você não tem autorização para esta ação.",
+        });
+        direcionar("/login");
+        break;
+
+      case undefined:
+        toast.update(idNotificar, {
+          type: "error",
+          isLoading: false,
+          autoClose: 5000,
+          closeButton: true,
+          closeOnClick: true,
+          render: "Postagem inexistente.",
+        });
+        direcionar("/postagens");
+        break;
+
+      case "serverError":
+        toast.update(idNotificar, {
+          type: "error",
+          isLoading: false,
+          autoClose: 5000,
+          closeButton: true,
+          closeOnClick: true,
+          render: "Servidor inativo para esta ação.",
+        });
+        break;
+
+      default:
+        toast.update(idNotificar, {
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+          closeButton: true,
+          closeOnClick: true,
+          render: "Postagem excluída com sucesso!",
+        });
+        direcionar("/postagens");
+        break;
     }
   };
 
@@ -67,12 +135,17 @@ function ViewPostagem() {
   return (
     <section id="postagem">
       <section id="postInformacoes">
+        {postagemEditavel && (
+          <button id="botaoExcluir" onClick={handleExclusao}>
+            <img src={iconExcluir} alt="Excluir postagem" />
+          </button>
+        )}
         <h4>{conteudo.titulo}</h4>
         <h5>{conteudo.subtitulo}</h5>
         <div id="criadorInfos">
-        <span>{conteudo.categoria}</span>
-        <span>-</span>
-        <Link to={`/usuario/${conteudo.criador}`}>{conteudo.criador}</Link>
+          <span>{conteudo.categoria}</span>
+          <span>-</span>
+          <Link to={`/usuario/${conteudo.criador}`}>{conteudo.criador}</Link>
         </div>
         <figure id="postImagem">
           <img

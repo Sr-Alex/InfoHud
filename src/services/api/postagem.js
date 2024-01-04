@@ -1,4 +1,4 @@
-import { apiURL, postConfig } from "./config";
+import { apiURL, deleteConfig, postConfig } from "./config";
 
 export async function publicarPost(dados) {
   return await fetch(
@@ -29,11 +29,11 @@ export async function publicarPost(dados) {
     .catch((error) => console.error("Ocorreu um erro: ", error));
 }
 
-export async function buscarPosts(
-  {usuario = undefined,
+export async function buscarPosts({
+  usuario = undefined,
   categoria = undefined,
-  id = undefined} = {}
-) {
+  id = undefined,
+} = {}) {
   return await fetch(
     `${apiURL}/postagem/?criador=${usuario ? usuario : ""}&categoria=${
       categoria ? categoria : ""
@@ -56,4 +56,27 @@ export async function buscarPosts(
     })
     .then((data) => data)
     .catch((error) => console.error("Ocorreu um erro: ", error));
+}
+
+export async function excluirPost(id = undefined) {
+  return fetch(`${apiURL}/postagem/?id=${id ? id : ""}`, deleteConfig)
+    .then((res) => {
+      switch (res.status) {
+        case 200:
+          return res.json();
+
+        case 401:
+          return "accessoNãoAutorizado";
+
+        case 404:
+          return undefined;
+
+        case 500:
+          return "serverError";
+
+        default:
+          throw new Error("Algo deu errado na requisição: código", res.status);
+      }
+    })
+    .then((data) => data);
 }

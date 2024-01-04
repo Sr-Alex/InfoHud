@@ -3,12 +3,6 @@
     width: 100%; height: calc(100vh - var(--IH-headerHeight));
 }
 
-#botaoEditar {
-    display: block;
-    width: 1.5rem; aspect-ratio: 1/1;
-    margin: 0 0 0 auto;
-}
-
 #perfilContainer {
     width: 100%;
     padding: .5rem 1rem;
@@ -18,7 +12,7 @@
 
 #perfilInfos > h4, #perfilPosts > h4 {
     margin: 0 0 1rem .5rem;
-
+    
     font-size: 1.2rem;
     font-weight: bold;
 
@@ -33,7 +27,7 @@
     width: 16rem;
     max-height: 16rem; height: auto;
     margin: 1rem 0; padding: .5rem;
-
+    
     background-color: white;
     border-radius: 1rem;
 }
@@ -45,9 +39,9 @@
 
 #perfilPosts {
     width: 100%; padding: .5rem 0;
-
+    
     background-color: white;
-
+    
     overflow: hidden auto;
 }
 
@@ -55,15 +49,27 @@
     width: 100%;
 }
 
+#botaoEditar {
+    display: block;
+    width: 2rem; aspect-ratio: 1/1;
+    margin: 0 0 0 auto;
+}
+
 #updateUsuario {
     width: 100%;
+}
+
+#updateUsuario > h4 {
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+    color: var(--IH-blue);
 }
 
 #updateUsuario div * {
     display: block;
     max-width: 80%; width: 16rem;
-    margin: 0 0 .5rem 0;
-
+    margin: 0 0 1rem 0;
+    
     font-size: 1rem;
 }
 
@@ -83,13 +89,22 @@
 
 #botaoAtualizarUsuario {
     width: 6rem; height: 1.5rem;
-
+    margin: 1rem 0;
+    
     font-size: 1rem;
 
     color: var(--IH-white);
     background-color: var(--IH-blue);
 
     border-radius: 1rem;
+}
+
+#botaoEditar:hover {
+    transform: scale(1.1);
+}
+
+#botaoEditar:active {
+    transform: scale(0.95)
 }
 
 @media (min-width: 1024px) {

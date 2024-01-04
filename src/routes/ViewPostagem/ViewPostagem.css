@@ -52,6 +52,20 @@
     line-height: 1.5rem;
 }
 
+#botaoExcluir {
+    display: block;
+    width: 2rem; aspect-ratio: 1/1;
+    margin: .5rem 1rem 0 auto;
+}
+
+#botaoExcluir:hover {
+    transform: scale(1.1);
+}
+
+#botaoExcluir:active {
+    transform: scale(0.95);
+}
+
 @media (min-width: 1024px) {
     #postagem{
         flex-direction: row; justify-content: space-between;

@@ -30,7 +30,7 @@ const router= createBrowserRouter([
         element: <PostagensPage/>
       },
       {
-        path: 'postagens/postagem/:id',
+        path: 'postagens/:id',
         element: <ViewPostagem/>
       },
       {

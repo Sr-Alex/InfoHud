@@ -33,6 +33,10 @@ function UsuarioPage() {
 
   const direcionar = useNavigate();
 
+  const verificarPerfilEditavel = (perfilUsername) => {
+    setPerfilEditavel(usuario.username === perfilUsername);
+  }
+
   const toogleModoEditar = () => {
     setModoEditar(!modoEditar);
   };
@@ -48,10 +52,10 @@ function UsuarioPage() {
   };
 
   const carregarUsuario = async () => {
-    const usuario = await fetchUsuario(username);
-    const postagens = await buscarPosts(username);
+    const response = await fetchUsuario(username);
+    const postagens = await buscarPosts({ usuario: username });
 
-    switch (usuario) {
+    switch (response) {
       case undefined:
         toast("Usuário Inexistente.", {
           type: "error",
@@ -74,9 +78,10 @@ function UsuarioPage() {
       default:
         setUsuarioInfos({
           ...usuarioInfos,
-          infos: usuario,
+          infos: response,
           postagens: Array.isArray(postagens) ? postagens : [],
         });
+        verificarPerfilEditavel(response.username)
         break;
     }
   };
@@ -134,16 +139,13 @@ function UsuarioPage() {
           render: "Informações usuário atualizada com sucesso!",
         });
         toogleModoEditar();
-        direcionar('/usuario/' + usuarioInfos.infos.username);
+        direcionar("/usuario/" + usuarioInfos.infos.username);
         break;
     }
   };
 
   useEffect(() => {
     carregarUsuario();
-    if (!perfilEditavel && usuario.username === usuarioInfos.infos.username) {
-      setPerfilEditavel(true);
-    }
   }, []);
 
   return (
@@ -217,6 +219,7 @@ function UsuarioPage() {
             usuarioInfos.postagens.map((post) => (
               <SpanPost
                 key={post.id}
+                id={post.id}
                 titulo={post.titulo}
                 subtitulo={post.subtitulo}
                 conteudo={post.conteudo}
