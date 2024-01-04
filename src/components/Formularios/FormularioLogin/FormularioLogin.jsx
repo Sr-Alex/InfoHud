@@ -24,58 +24,55 @@ function FormularioLogin() {
 
   const loginHandler = async (evento) => {
     evento.preventDefault();
-    
-    const notificarId = toast.loading("Fazendo login...");
+    const response = validarLogin(loginInfos);
 
-    validarLogin(loginInfos)
-      .then((res) => {
-        switch (res) {
-          case undefined:
-            toast.update(notificarId, {
-              type: "warning",
-              render: "Usuário não inexistente!",
-              isLoading: false,
-              autoClose: 5000,
-            });
-            console.error("Usuário inexistente!");
-            break;
+    const idNotificar = toast.loading("Fazendo login...");
 
-          case "serverError":
-            toast.update(notificarId, {
-              type: "error",
-              render: "Servidor inativo para esta ação!",
-              isLoading: false,
-              autoClose: 5000,
-            });
-            console.error("Servidor inativo para a ação de login.");
-            break;
-
-          case "accessoNãoAutorizado":
-            console.error("Senha incorreta!");
-            break;
-
-          default:
-            toast.update(notificarId, {
-              type: "success",
-              render: "Você está logado. Aproveite!",
-              isLoading: false,
-              closeOnClick: true,
-              autoClose: 3000
-            });
-            setUsuario(res);
-            salvarUsuario(res);
-            direcionar("/postagens");
-        }
-      })
-      .catch((erro) => {
-        toast.update(notificarId, {
-          type: "error",
-          render: "Algo deu errado com a requisição.",
+    switch (response) {
+      case undefined:
+        toast.update(idNotificar, {
+          type: "warning",
+          render: "Usuário inexistente!",
           isLoading: false,
           autoClose: 5000,
         });
-        console.error(`Algo deu errado com a requisição: ${erro}`);
-      });
+        console.error("Usuário inexistente!");
+        break;
+
+      case "serverError":
+        toast.update(idNotificar, {
+          type: "error",
+          render: "Servidor inativo para esta ação!",
+          isLoading: false,
+          autoClose: 5000,
+        });
+        console.error("Servidor inativo para a ação de login.");
+        break;
+
+      case "accessoNãoAutorizado":
+        toast.update(idNotificar, {
+          type: "warning",
+          isLoading: false,
+          autoClose: 3000,
+          closeButton: true,
+          closeOnClick: true,
+          render: "Senha incorreta!",
+        });
+        console.error("Senha incorreta!");
+        break;
+
+      default:
+        toast.update(idNotificar, {
+          type: "success",
+          render: "Você está logado. Aproveite!",
+          isLoading: false,
+          closeOnClick: true,
+          autoClose: 3000,
+        });
+        setUsuario(response);
+        salvarUsuario(response);
+        direcionar("/postagens");
+    }
   };
 
   return (
