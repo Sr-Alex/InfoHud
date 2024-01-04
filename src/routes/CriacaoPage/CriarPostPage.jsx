@@ -87,7 +87,6 @@ function CriarPostPage() {
             return console.error("Servidor inativo para esta ação.");
 
           default:
-            console.log("Post criado com sucesso!");
             toast.update(notificarId, {
               type: "success",
               render: "Postagem criada com sucesso!",

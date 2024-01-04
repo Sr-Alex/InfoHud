@@ -58,12 +58,12 @@ export async function buscarPosts({
     .catch((error) => console.error("Ocorreu um erro: ", error));
 }
 
-export async function excluirPost(id = undefined) {
-  return fetch(`${apiURL}/postagem/?id=${id ? id : ""}`, deleteConfig)
+export async function excluirPost(token, id) {
+  return fetch(`${apiURL}/postagem/`, deleteConfig(token, {id:id}))
     .then((res) => {
       switch (res.status) {
         case 200:
-          return res.json();
+          return true;
 
         case 401:
           return "accessoNãoAutorizado";

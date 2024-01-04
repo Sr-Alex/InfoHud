@@ -30,43 +30,47 @@ function FormularioCadastro() {
   const cadastroHandler = async (evento) => {
     evento.preventDefault();
 
-    const notificarId = toast.loading("Criando perfil de usuário... ");
+    const response = validarCadastro(cadastroInfos);
 
-    validarCadastro(cadastroInfos)
-      .then((res) => {
-        switch (res) {
-          case "serverError":
-            toast.update(notificarId, {
-              type: "error",
-              render: "Servidor inativo para esta ação!",
-              isLoading: false,
-              autoClose: 5000,
-            });
-            console.error("Servidor inativo para a ação de cadastro.");
-            break;
+    const idNotificar = toast.loading("Criando perfil de usuário... ");
 
-          default:
-            toast.update(notificarId, {
-              type: "success",
-              render: "Usuário criado e logado com sucesso. Aproveite!",
-              isLoading: false,
-              autoClose: 5000,
-            });
+    switch (response) {
+      case "badRequest":
+        toast.update(idNotificar, {
+          type: "warning",
+          isLoading: false,
+          autoClose: 3000,
+          closeButton: true,
+          closeOnClick: true,
+          render: "Preencha todos os campos corretamente!",
+        });
+        break;
 
-            salvarUsuario(res);
-            loginAutomatico(setUsuario);
-            return direcionar("/postagens");
-        }
-      })
-      .catch((erro) => {
-        toast.update(notificarId, {
+      case "serverError":
+        toast.update(idNotificar, {
           type: "error",
-          render: "Algo deu errado com a requisição.",
           isLoading: false,
           autoClose: 5000,
+          closeButton: true,
+          closeOnClick: true,
+          render: "Servidor inativo para esta ação.",
         });
-        console.error(`Algo deu errado com a requisição: ${erro}`);
-      });
+        break;
+
+      default:
+        toast.update(idNotificar, {
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+          closeButton: true,
+          closeOnClick: true,
+          render: "Perfil de usuário criado com sucesso. Aproveite!",
+        });
+        salvarUsuario(response);
+        loginAutomatico(setUsuario);
+        direcionar("/postagens");
+        break;
+    }
   };
 
   return (

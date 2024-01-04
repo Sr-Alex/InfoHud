@@ -42,12 +42,13 @@ export const patchConfig = (token, data) => {
   }
 }
 
-export const deleteConfig = (token) => {
+export const deleteConfig = (token, id) => {
   return {
     method: "DELETE",
     headers: {
       "Authorization": `Bearer ${token}`,
       "Content-Type": "application/json"
-    }
+    },
+    body: JSON.stringify(id)
   }
 }

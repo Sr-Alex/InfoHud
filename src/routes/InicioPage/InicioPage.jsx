@@ -35,7 +35,7 @@ function InicioPage() {
         <main id="inicioPage">
             <section id="bemVindo">
                 <Logo/>
-                <p>Sua comunidade apaixonada e focada em programação</p>
+                <p>Sua comunidade apaixonada e focada em programação.</p>
             </section>
             <figure id="imgBG">
                 <img src={logosInicio} alt="Apresentamos-lhe o InfoHud!"  />
@@ -43,8 +43,8 @@ function InicioPage() {
             <section id="aproveite">
                 <h2>
                     {
-                        usuario.apelido 
-                        ? `Bem-vindo(a) de volta, ${usuario.apelido}!`
+                        usuario.username 
+                        ? `Bem-vindo(a) de volta, ${usuario.username}!`
                         : 'Bem-vindo(a)!'
                     }
                 </h2>
@@ -55,7 +55,7 @@ function InicioPage() {
                     {
                         !usuario.username &&  (
                             <div>
-                                <h4>Faça login login para fazer parte!</h4>
+                                <p>Faça login para fazer parte da comunidade InfoHud!</p>
                                 <button onClick={handleBotaoLogin}>Login</button>
                             </div>
                         )

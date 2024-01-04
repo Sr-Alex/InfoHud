@@ -1,5 +1,5 @@
-import { efetuarCadastro, fazerLogin } from './api/auth.js';
-import { publicarPost } from './api/postagem.js';
+import { efetuarCadastro, fazerLogin } from "./api/auth.js";
+import { publicarPost } from "./api/postagem.js";
 
 const emailRegex = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
 
@@ -11,24 +11,27 @@ export function validarCadastro(infos) {
     senha: "",
   };
 
-  if (Object.keys(infos).length !== Object.keys(cadastroTemplate).length) {
-    return console.error("Quantidade de campos não corresponde!");
+  if (Object.keys(infos) === Object.keys(cadastroTemplate)) {
+    console.error("Os campos das informações de cadastro não correspondem: " + infos);
+    return "badRequest";
   } else if (!emailRegex.test(infos.email)) {
-    return console.error("Email inválido!");
+    console.error("Email inválido!");
+    return "badRequest";
   }
 
-  for (const campo of Object.keys(infos)) {
-    if (!Object.keys(cadastroTemplate).includes(campo)) {
-      return console.error("Campos não correspondem!");
+  Object.values(infos).map(campo => {
+    if (!campo) {
+      console.error("Não deixe campos vazios.");
+      return "badRequest";
     }
-  }
+  })
 
   return efetuarCadastro({
     username: infos.nickname,
     first_name: infos.nome,
     email: infos.email,
     password: infos.senha,
-    last_name: ""
+    last_name: "",
   });
 }
 
@@ -66,29 +69,30 @@ export function validarPost(post) {
   };
 
   if (Object.keys(post).length !== Object.keys(postTemplate).length) {
-    return console.error("Campos não correspondem!");
+    console.error(
+      "Ocorreu um erro com os valores no formulário de postagem: " + post
+    );
+    return "badRequest";
   }
 
-  for (const campo of Object.keys(post)) {
-    if (!Object.keys(postTemplate).includes(campo)) {
-      return console.error("Campos inválidos!");
+  Object.values(post).map((campo) => {
+    if (!campo) {
+      console.error(
+        "Ocorreu um erro com os valores no formulário de postagem: " + post
+      );
+      return "badRequest";
     }
-  }
+  });
+
   return publicarPost({
     token: post.token,
     postagem: {
-      "titulo": post.titulo,
-      "subtitulo": post.subtitulo,
-      "categoria": post.categoria,
-      "miniurl": post.miniatura,
-      "conteudo": post.conteudo,
-      "user_nickname": post.criador,
-      // "titulo": "Teste enviado pelo Thunder",
-      //   "subtitulo": "subtitulo",
-      //   "categoria": "categoria",
-      //   "miniurl": "12313o4j2o5j3b",
-      //   "conteudo": "conteudo",
-      //   "user_nickname": "AlexN64"
+      titulo: post.titulo,
+      subtitulo: post.subtitulo,
+      categoria: post.categoria,
+      miniurl: post.miniatura,
+      conteudo: post.conteudo,
+      user_nickname: post.criador,
     },
   });
 }

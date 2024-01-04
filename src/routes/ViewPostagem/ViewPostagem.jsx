@@ -70,7 +70,7 @@ function ViewPostagem() {
   };
 
   const handleExclusao = async () => {
-    const response = await excluirPost(conteudo.id);
+    const response = await excluirPost(usuario.token, conteudo.id);
 
     const idNotificar = toast.loading("Realizando exclusão de postagem...");
 

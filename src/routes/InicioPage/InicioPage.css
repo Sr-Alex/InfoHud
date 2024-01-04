@@ -45,17 +45,19 @@
 }
 
 #aproveite h2 {
-    margin: 1rem 0;
+    width: 12rem;
+    margin: 1rem 0 1rem auto;
 }
 
 #aproveite p {
     width: 90%;
     margin: 0 0 0 auto;
+    letter-spacing: 1px;
 }
 
 #campoDeAcao {
     width: auto; height: 8rem;
-    margin: 0 0 0 auto;
+    margin: 1rem 0 0 auto;
 
     text-align: end;
 }

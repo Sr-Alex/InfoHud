@@ -16,8 +16,8 @@ function LoginPage() {
     <section className={`loginPage ${mostrarLogin ? "login" : "cadastro"}`}>
       <section id="recepcao">
         <div>
-          <h3>Faça login na sua conta InfoHud</h3>
-          <p>Sua plataforma de ensino na área de programação</p>
+          <h3>Faça login na sua conta InfoHud!</h3>
+          <p>Sua plataforma de ensino na área da programação.</p>
         </div>
 
         <span>
@@ -25,7 +25,7 @@ function LoginPage() {
             ? "Ainda não faz parte?"
             : "Já faz parte da comunidade?"}
           <button onClick={toogleLogin}>
-            {mostrarLogin ? "Cadastre-se" : "Entarar"}
+            {mostrarLogin ? "Cadastre-se!" : "Login!"}
           </button>
         </span>
       </section>
