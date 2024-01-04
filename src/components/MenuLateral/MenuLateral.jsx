@@ -46,7 +46,7 @@ function MenuLateral({ carregarPosts }) {
   return (
     <nav id="menuLateral">
       <h3>Filtrar postagens</h3>
-      <h4>Categorias</h4>
+      <h4>Categorias:</h4>
       <section id="categoriasLateral">
         <div>
           <input

@@ -10,7 +10,7 @@
 }
 
 #menuLateral h4 {
-    margin: .5rem 0;
+    margin: 1rem 0 .5rem 0;
 }
 
 #categoriasLateral {
@@ -51,7 +51,6 @@
 
 #criarPost button{
     width: 8rem; height: 2rem;
-    margin: 1rem auto;
 
     font-size: 1em;
     font-weight: bold;

@@ -51,7 +51,7 @@ function PostagensPage() {
             />
           ))
         ) : (
-          <IconErro mensagem="Nenhum post encontrado." />
+          <IconErro mensagem="Nenhuma postagem encontrada." />
         )}
       </ul>
     </section>

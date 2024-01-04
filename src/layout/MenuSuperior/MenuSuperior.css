@@ -1,34 +1,19 @@
-#pesquisar {
-    display: none;
-    min-width: 6rem; height: 1.5rem;
-    padding: 0 .5rem;
-
-    background-color: white;
-    border: 2px solid var(--IH-gray);
-    border-radius: 1rem;
-}        
-#pesquisar #searcher {
-
-    width: 90%; height: 100%;
-    background: none;
-}    
-
-#pesquisar button {
-    width: 10%; height: 100%;
-}    
-
 #menuSuperior {
     display: flex; align-items: center;
     justify-content: space-between;
     width: 100%; height: var(--IH-headerHeight);
-    padding: 0 .5rem;
+    padding: 0 1rem; gap: 1rem;
 
     background-color: var(--IH-white);
-}    
+}   
+
+#menuSuperior h1 {
+    min-width: max-content; width: 30%;
+}
 
 #navigation {
     display: flex; justify-content: space-between;
-    min-width: 12rem; width: 33.3333%;
+    max-width: 16rem; width: 70%;
 }    
 
 #navigation a{
