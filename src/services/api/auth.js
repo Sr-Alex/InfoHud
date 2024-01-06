@@ -20,14 +20,7 @@ export async function fazerLogin(infos) {
             throw new Error("Algo deu errado na requisição: código ", res.status);
         }
       })
-      .then((data) => {
-        if (typeof data === Object)
-          return {
-            apelido: data.username,
-            token: data.token,
-          };
-        return data;
-      })
+      .then((data) => data)
       .catch((error) => console.error("Ocorreu um erro: ", error));
   }
   

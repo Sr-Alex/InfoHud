@@ -30,9 +30,9 @@ function FormularioCadastro() {
   const cadastroHandler = async (evento) => {
     evento.preventDefault();
 
-    const response = validarCadastro(cadastroInfos);
-
     const idNotificar = toast.loading("Criando perfil de usuário... ");
+    
+    const response = await validarCadastro(cadastroInfos);
 
     switch (response) {
       case "badRequest":
@@ -84,7 +84,7 @@ function FormularioCadastro() {
         onChange={(evento) => atualizarInfos(evento)}
         placeholder="Digite seu nome completo..."
       />
-      <label htmlFor="cadastroNickname">Apelido:</label>
+      <label htmlFor="cadastroNickname">username:</label>
       <input
         type="text"
         name="nickname"

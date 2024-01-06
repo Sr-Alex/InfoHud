@@ -45,17 +45,19 @@ function CriarPostPage() {
     });
   };
 
-  const postar = (evento) => {
+  const postar = async (evento) => {
     evento.preventDefault();
     if (verificarUsuario()) {
+
       const notificarId = toast.loading("Criando postagem...");
 
-      validarPost({
+      const response = await validarPost({
         ...postagem,
         token: usuario.token,
         criador: usuario.username,
-      }).then((res) => {
-        switch (res) {
+      });
+
+        switch (response) {
           case "badRequest":
             toast.update(notificarId, {
               type: "warning",
@@ -95,8 +97,7 @@ function CriarPostPage() {
               autoClose: 3000,
             });
             return direcionar("/postagens");
-        }
-      });
+        };
     } else {
       return direcionar("/login");
     }

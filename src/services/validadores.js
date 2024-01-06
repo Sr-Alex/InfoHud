@@ -37,7 +37,7 @@ export function validarCadastro(infos) {
 
 export async function validarLogin(infos) {
   const loginTemplate = {
-    apelido: "",
+    username: "",
     senha: "",
   };
 
@@ -52,7 +52,7 @@ export async function validarLogin(infos) {
   }
 
   return fazerLogin({
-    username: infos.apelido,
+    username: infos.username,
     password: infos.senha,
   });
 }

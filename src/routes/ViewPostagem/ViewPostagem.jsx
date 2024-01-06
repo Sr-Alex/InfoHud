@@ -70,9 +70,9 @@ function ViewPostagem() {
   };
 
   const handleExclusao = async () => {
+    const idNotificar = toast.loading("Realizando a exclusão da postagem...");
+    
     const response = await excluirPost(usuario.token, conteudo.id);
-
-    const idNotificar = toast.loading("Realizando exclusão de postagem...");
 
     switch (response) {
       case "accessoNãoAutorizado":

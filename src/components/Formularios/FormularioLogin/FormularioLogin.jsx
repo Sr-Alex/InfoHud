@@ -7,7 +7,7 @@ import "../Formulario.css";
 import { useNavigate } from "react-router-dom";
 import { salvarUsuario } from "../../../services/storage";
 
-const infosIniciais = { apelido: "", senha: "" };
+const infosIniciais = { username: "", senha: "" };
 
 function FormularioLogin() {
   const [loginInfos, setLoginInfos] = useState(infosIniciais);
@@ -24,9 +24,9 @@ function FormularioLogin() {
 
   const loginHandler = async (evento) => {
     evento.preventDefault();
-    const response = validarLogin(loginInfos);
-
     const idNotificar = toast.loading("Fazendo login...");
+    
+    const response = await validarLogin(loginInfos);
 
     switch (response) {
       case undefined:
@@ -77,10 +77,10 @@ function FormularioLogin() {
 
   return (
     <form onSubmit={loginHandler} className="formulario">
-      <label htmlFor="loginApelido">Apelido:</label>
+      <label htmlFor="loginApelido">username:</label>
       <input
         type="text"
-        name="apelido"
+        name="username"
         id="loginApelido"
         autoComplete="true"
         onChange={atualizarForm}

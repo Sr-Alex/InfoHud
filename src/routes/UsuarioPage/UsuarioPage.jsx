@@ -85,14 +85,17 @@ function UsuarioPage() {
         break;
     }
   };
-  const handlePatchUsuario = (evento) => {
+  const handlePatchUsuario = async (evento) => {
     evento.preventDefault();
+
+    const idNotificar = toast.loading("Atualizando informações de usuário....");
+
     const response = updateUsuario(
       usuario.username,
       usuario.token,
       camposAlterados
     );
-    const idNotificar = toast.loading("Atualizando informações de usuário....");
+
     switch (response) {
       case "accessoNãoAutorizado":
         toast.update(idNotificar, {
@@ -140,6 +143,7 @@ function UsuarioPage() {
         });
         toogleModoEditar();
         direcionar("/usuario/" + usuarioInfos.infos.username);
+        location.reload();
         break;
     }
   };
